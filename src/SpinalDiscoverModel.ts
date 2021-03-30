@@ -2,24 +2,25 @@ import { spinalCore, Model, Ptr, Lst } from 'spinal-core-connectorjs_type';
 import { STATES } from "./stateEnum";
 
 class SpinalDisoverModel extends Model {
-   constructor(graph, contextInfo, network) {
+   constructor(graph, contextInfo, network, organ) {
       super();
 
       this.add_attr({
          state: STATES.reseted,
-         graph: new Ptr(graph),
+         graph: graph ? new Ptr(graph) : undefined,
          devices: new Lst(),
-         context: contextInfo,
-         network: network,
+         context: contextInfo || {},
+         network: network || {},
+         organ: organ,
          creation: Date.now()
       })
    }
 
    setDiscoveringMode() {
       this.state.set(STATES.discovering);
-      setTimeout(() => {
-         if (this.state.get() === STATES.discovering) this.setTimeoutMode();
-      }, 40000)
+      // setTimeout(() => {
+      //    if (this.state.get() === STATES.discovering) this.setTimeoutMode();
+      // }, 40000)
    }
 
    setDiscoveredMode() {
@@ -42,17 +43,17 @@ class SpinalDisoverModel extends Model {
       this.state.set(STATES.created);
    }
 
-   addToGraph(graph) {
-      if (!graph.info.discover) {
+   addToGraph() {
+      if (!this.organ.discover) {
          const x = new Lst();
          x.push(this);
-         graph.info.add_attr({
+         this.organ.add_attr({
             discover: new Ptr(x),
          });
          Promise.resolve(true);
       } else {
          return new Promise((resolve, reject) => {
-            graph.info.discover.load((list) => {
+            this.organ.discover.load((list) => {
                list.push(this);
                resolve(true);
             });
@@ -61,18 +62,17 @@ class SpinalDisoverModel extends Model {
    }
 
    remove() {
-      this.graph.load(graph => {
-         graph.info.discover.load((list) => {
-            for (let i = 0; i < list.length; i++) {
-               const element = list[i];
-               if (element._server_id === this._server_id) {
-                  list.splice(i);
-                  return;
-               }
+      // this.graph.load(graph => {
+      this.organ.discover.load((list) => {
+         for (let i = 0; i < list.length; i++) {
+            const element = list[i];
+            if (element._server_id === this._server_id) {
+               list.splice(i);
+               return;
             }
-
-         });
-      })
+         }
+      });
+      // })
 
    }
 
