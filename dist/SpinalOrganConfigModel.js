@@ -11,17 +11,33 @@ class SpinalOrganConfigModel extends spinal_core_connectorjs_type_1.Model {
             name: name,
             type: BACNET_ORGAN_TYPE,
             references: {},
-            state: false,
+            restart: false,
         });
     }
     addReference(contextId, spinalNode) {
         if (this.references[contextId]) {
-            throw new Error("The organ is already linked to this context");
+            return new Promise((resolve, reject) => {
+                this.references[contextId].load((e) => {
+                    if (typeof e !== "undefined")
+                        return reject("The organ is already linked to this context");
+                    this.references.mod_attr(contextId, new spinal_core_connectorjs_type_1.Ptr(spinalNode));
+                    resolve(spinalNode);
+                });
+            });
         }
         this.references.add_attr({ [contextId]: new spinal_core_connectorjs_type_1.Ptr(spinalNode) });
+        return Promise.resolve(spinalNode);
     }
     isReferencedInContext(contextId) {
-        return typeof this.references[contextId] !== "undefined";
+        if (typeof this.references[contextId] === "undefined")
+            return Promise.resolve(false);
+        return new Promise((resolve, reject) => {
+            this.references[contextId].load((e) => {
+                if (typeof e === "undefined")
+                    return resolve(false);
+                resolve(true);
+            });
+        });
     }
     removeReference(contextId) {
         if (this.references[contextId]) {
