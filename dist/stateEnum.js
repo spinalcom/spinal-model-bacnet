@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.STATES = void 0;
 var STATES;
 (function (STATES) {
+    STATES[STATES["error"] = -1] = "error";
     STATES[STATES["reseted"] = 0] = "reseted";
     STATES[STATES["discovering"] = 1] = "discovering";
     STATES[STATES["discovered"] = 2] = "discovered";

@@ -43,6 +43,10 @@ class SpinalDisoverModel extends Model {
       this.state.set(STATES.created);
    }
 
+   setErrorMode() {
+      this.state.set(STATES.error);
+   }
+
    addToGraph() {
       if (!this.organ.discover) {
          const x = new Lst();
@@ -63,15 +67,18 @@ class SpinalDisoverModel extends Model {
 
    remove() {
       // this.graph.load(graph => {
-      this.organ.discover.load((list) => {
-         for (let i = 0; i < list.length; i++) {
-            const element = list[i];
-            if (element._server_id === this._server_id) {
-               list.splice(i);
-               return;
+      return new Promise((resolve, reject) => {
+         this.organ.discover.load((list) => {
+            for (let i = 0; i < list.length; i++) {
+               const element = list[i];
+               if (element._server_id === this._server_id) {
+                  list.splice(i);
+                  return resolve(true);
+               }
             }
-         }
+         });
       });
+
       // })
 
    }

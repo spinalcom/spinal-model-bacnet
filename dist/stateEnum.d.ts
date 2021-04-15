@@ -1,4 +1,5 @@
 export declare enum STATES {
+    error = -1,
     reseted = 0,
     discovering = 1,
     discovered = 2,

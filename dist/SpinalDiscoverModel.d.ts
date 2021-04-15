@@ -7,8 +7,9 @@ declare class SpinalDisoverModel extends Model {
     setTimeoutMode(): void;
     setCreatingMode(): void;
     setCreatedMode(): void;
+    setErrorMode(): void;
     addToGraph(): Promise<unknown>;
-    remove(): void;
+    remove(): Promise<unknown>;
 }
 export default SpinalDisoverModel;
 export { SpinalDisoverModel };
