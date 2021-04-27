@@ -2,25 +2,26 @@ import { spinalCore, Model, Ptr, Choice } from 'spinal-core-connectorjs_type';
 
 
 class SpinalBacnetValueModel extends Model {
-   constructor(graph: any, context: any, network: any, node: any) {
+   constructor(graph: any, context: any, network: any, node: any, sensor: any) {
       super();
       this.add_attr({
          context: new Ptr(context),
          node: new Ptr(node),
          graph: new Ptr(graph),
          network: new Ptr(network),
-         state: new Choice(0, ['normal', 'success', 'error'])
+         state: new Choice(0, ['normal', 'success', 'error']),
+         sensor: sensor
       })
    }
 
    addToNode() {
-      this.loadItem('node').then((node: any) => {
+      return this.loadItem('node').then((node: any) => {
          node.info.add_attr({ bacnet: new Ptr(this) });
       })
    }
 
    remToNode() {
-      this.loadItem('node').then((node: any) => {
+      return this.loadItem('node').then((node: any) => {
          node.info.rem_attr('bacnet');
       })
 
