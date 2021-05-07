@@ -10,8 +10,9 @@ class SpinalBacnetValueModel extends spinal_core_connectorjs_type_1.Model {
             node: new spinal_core_connectorjs_type_1.Ptr(node),
             graph: new spinal_core_connectorjs_type_1.Ptr(graph),
             network: new spinal_core_connectorjs_type_1.Ptr(network),
-            state: new spinal_core_connectorjs_type_1.Choice(0, ['normal', 'success', 'error']),
-            sensor: sensor
+            state: 'wait',
+            sensor: sensor,
+            progress: 0
         });
     }
     addToNode() {
@@ -41,6 +42,24 @@ class SpinalBacnetValueModel extends spinal_core_connectorjs_type_1.Model {
                 resolve(res);
             });
         });
+    }
+    setWaitState() {
+        this.state.set("wait");
+    }
+    setRecoverState() {
+        this.state.set("recover");
+    }
+    setProgressState() {
+        this.state.set("progress");
+    }
+    setNormalState() {
+        this.state.set("normal");
+    }
+    setSuccessState() {
+        this.state.set("success");
+    }
+    setErrorState() {
+        this.state.set("error");
     }
 }
 exports.SpinalBacnetValueModel = SpinalBacnetValueModel;

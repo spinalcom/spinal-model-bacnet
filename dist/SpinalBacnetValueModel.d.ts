@@ -10,6 +10,12 @@ declare class SpinalBacnetValueModel extends Model {
         network: unknown;
     }>;
     loadItem(name: any): Promise<unknown>;
+    setWaitState(): void;
+    setRecoverState(): void;
+    setProgressState(): void;
+    setNormalState(): void;
+    setSuccessState(): void;
+    setErrorState(): void;
 }
 export default SpinalBacnetValueModel;
 export { SpinalBacnetValueModel };

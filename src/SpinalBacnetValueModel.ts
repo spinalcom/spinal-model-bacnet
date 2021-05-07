@@ -9,8 +9,9 @@ class SpinalBacnetValueModel extends Model {
          node: new Ptr(node),
          graph: new Ptr(graph),
          network: new Ptr(network),
-         state: new Choice(0, ['normal', 'success', 'error']),
-         sensor: sensor
+         state: 'wait',
+         sensor: sensor,
+         progress: 0
       })
    }
 
@@ -45,6 +46,31 @@ class SpinalBacnetValueModel extends Model {
             resolve(res);
          })
       });
+   }
+
+
+   setWaitState() {
+      this.state.set("wait")
+   }
+
+   setRecoverState() {
+      this.state.set("recover")
+   }
+
+   setProgressState() {
+      this.state.set("progress")
+   }
+
+   setNormalState() {
+      this.state.set("normal")
+   }
+
+   setSuccessState() {
+      this.state.set("success")
+   }
+
+   setErrorState() {
+      this.state.set("error")
    }
 
 
