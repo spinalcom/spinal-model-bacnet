@@ -1,6 +1,6 @@
 import { Model } from 'spinal-core-connectorjs_type';
 declare class SpinalBacnetValueModel extends Model {
-    constructor(graph: any, context: any, network: any, node: any, sensor: any);
+    constructor(graph: any, context: any, organ: any, network: any, node: any, sensor: any);
     addToNode(): Promise<void>;
     remToNode(): Promise<void>;
     getAllItem(): Promise<{
@@ -8,6 +8,7 @@ declare class SpinalBacnetValueModel extends Model {
         node: unknown;
         graph: unknown;
         network: unknown;
+        organ: unknown;
     }>;
     loadItem(name: any): Promise<unknown>;
     setWaitState(): void;

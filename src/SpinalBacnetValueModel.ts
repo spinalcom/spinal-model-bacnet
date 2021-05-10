@@ -2,13 +2,14 @@ import { spinalCore, Model, Ptr, Choice } from 'spinal-core-connectorjs_type';
 
 
 class SpinalBacnetValueModel extends Model {
-   constructor(graph: any, context: any, network: any, node: any, sensor: any) {
+   constructor(graph: any, context: any, organ: any, network: any, node: any, sensor: any) {
       super();
       this.add_attr({
          context: new Ptr(context),
          node: new Ptr(node),
          graph: new Ptr(graph),
          network: new Ptr(network),
+         organ: new Ptr(organ),
          state: 'wait',
          sensor: sensor,
          progress: 0
@@ -29,13 +30,14 @@ class SpinalBacnetValueModel extends Model {
    }
 
    getAllItem() {
-      const promises = [this.loadItem('context'), this.loadItem('node'), this.loadItem('graph'), this.loadItem('network')];
-      return Promise.all(promises).then(([context, node, graph, network]) => {
+      const promises = [this.loadItem('context'), this.loadItem('node'), this.loadItem('graph'), this.loadItem('network'), this.loadItem('organ')];
+      return Promise.all(promises).then(([context, node, graph, network, organ]) => {
          return {
             context,
             node,
             graph,
-            network
+            network,
+            organ
          }
       })
    }

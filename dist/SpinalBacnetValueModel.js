@@ -3,13 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SpinalBacnetValueModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
 class SpinalBacnetValueModel extends spinal_core_connectorjs_type_1.Model {
-    constructor(graph, context, network, node, sensor) {
+    constructor(graph, context, organ, network, node, sensor) {
         super();
         this.add_attr({
             context: new spinal_core_connectorjs_type_1.Ptr(context),
             node: new spinal_core_connectorjs_type_1.Ptr(node),
             graph: new spinal_core_connectorjs_type_1.Ptr(graph),
             network: new spinal_core_connectorjs_type_1.Ptr(network),
+            organ: new spinal_core_connectorjs_type_1.Ptr(organ),
             state: 'wait',
             sensor: sensor,
             progress: 0
@@ -26,13 +27,14 @@ class SpinalBacnetValueModel extends spinal_core_connectorjs_type_1.Model {
         });
     }
     getAllItem() {
-        const promises = [this.loadItem('context'), this.loadItem('node'), this.loadItem('graph'), this.loadItem('network')];
-        return Promise.all(promises).then(([context, node, graph, network]) => {
+        const promises = [this.loadItem('context'), this.loadItem('node'), this.loadItem('graph'), this.loadItem('network'), this.loadItem('organ')];
+        return Promise.all(promises).then(([context, node, graph, network, organ]) => {
             return {
                 context,
                 node,
                 graph,
-                network
+                network,
+                organ
             };
         });
     }
