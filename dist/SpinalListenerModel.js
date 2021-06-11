@@ -8,6 +8,7 @@ class SpinalListenerModel extends spinal_core_connectorjs_type_1.Model {
         this.add_attr({
             graph: new spinal_core_connectorjs_type_1.Ptr(graph),
             listen: true,
+            saveTimeSeries: false,
             // timeInterval: timeInterval,
             device: new spinal_core_connectorjs_type_1.Ptr(bmsDeviceInfo),
             context: new spinal_core_connectorjs_type_1.Ptr(context),

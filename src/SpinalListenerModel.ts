@@ -9,6 +9,7 @@ class SpinalListenerModel extends Model {
       this.add_attr({
          graph: new Ptr(graph),
          listen: true,
+         saveTimeSeries: false,
          // timeInterval: timeInterval,
          device: new Ptr(bmsDeviceInfo),
          context: new Ptr(context),
