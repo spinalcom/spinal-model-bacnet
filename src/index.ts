@@ -5,7 +5,6 @@ import { SpinalBacnetValueModel } from "./SpinalBacnetValueModel"
 
 import { STATES } from "./stateEnum";
 
-
 export {
    SpinalDisoverModel,
    SpinalListenerModel,

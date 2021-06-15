@@ -2,10 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SpinalListenerModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
+const uuid_1 = require("uuid");
 class SpinalListenerModel extends spinal_core_connectorjs_type_1.Model {
     constructor(graph, context, network, bmsDeviceInfo, organ, monitor) {
         super();
         this.add_attr({
+            id: uuid_1.v4(),
             graph: new spinal_core_connectorjs_type_1.Ptr(graph),
             listen: true,
             saveTimeSeries: false,

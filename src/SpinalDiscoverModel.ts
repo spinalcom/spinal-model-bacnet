@@ -1,11 +1,13 @@
 import { spinalCore, Model, Ptr, Lst } from 'spinal-core-connectorjs_type';
 import { STATES } from "./stateEnum";
+import { v4 as uuidv4 } from "uuid";
 
 class SpinalDisoverModel extends Model {
    constructor(graph, contextInfo, network, organ) {
       super();
 
       this.add_attr({
+         id: uuidv4(),
          state: STATES.reseted,
          graph: graph ? new Ptr(graph) : undefined,
          devices: new Lst(),

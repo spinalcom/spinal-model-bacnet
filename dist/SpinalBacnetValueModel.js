@@ -2,10 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SpinalBacnetValueModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
+const uuid_1 = require("uuid");
 class SpinalBacnetValueModel extends spinal_core_connectorjs_type_1.Model {
     constructor(graph, context, organ, network, node, sensor) {
         super();
         this.add_attr({
+            id: uuid_1.v4(),
             context: new spinal_core_connectorjs_type_1.Ptr(context),
             node: new spinal_core_connectorjs_type_1.Ptr(node),
             graph: new spinal_core_connectorjs_type_1.Ptr(graph),

@@ -1,4 +1,5 @@
 import { spinalCore, Model, Ptr, Lst } from 'spinal-core-connectorjs_type';
+import { v4 as uuidv4 } from "uuid";
 
 const BACNET_ORGAN_TYPE = "BACNET_ORGAN";
 
@@ -12,6 +13,7 @@ class SpinalOrganConfigModel extends Model {
       super();
 
       this.add_attr({
+         id: uuidv4(),
          name: name,
          type: BACNET_ORGAN_TYPE,
          references: {},

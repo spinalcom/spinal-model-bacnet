@@ -3,10 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SpinalDisoverModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
 const stateEnum_1 = require("./stateEnum");
+const uuid_1 = require("uuid");
 class SpinalDisoverModel extends spinal_core_connectorjs_type_1.Model {
     constructor(graph, contextInfo, network, organ) {
         super();
         this.add_attr({
+            id: uuid_1.v4(),
             state: stateEnum_1.STATES.reseted,
             graph: graph ? new spinal_core_connectorjs_type_1.Ptr(graph) : undefined,
             devices: new spinal_core_connectorjs_type_1.Lst(),

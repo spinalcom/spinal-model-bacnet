@@ -2,12 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BACNET_ORGAN_TYPE = exports.SpinalOrganConfigModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
+const uuid_1 = require("uuid");
 const BACNET_ORGAN_TYPE = "BACNET_ORGAN";
 exports.BACNET_ORGAN_TYPE = BACNET_ORGAN_TYPE;
 class SpinalOrganConfigModel extends spinal_core_connectorjs_type_1.Model {
     constructor(name) {
         super();
         this.add_attr({
+            id: uuid_1.v4(),
             name: name,
             type: BACNET_ORGAN_TYPE,
             references: {},
