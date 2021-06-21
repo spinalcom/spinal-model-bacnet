@@ -1,9 +1,11 @@
 import { spinalCore, Model, Ptr, Lst } from 'spinal-core-connectorjs_type';
-import { STATES } from "./stateEnum";
+import { STATES } from "../stateEnum";
 import { v4 as uuidv4 } from "uuid";
+import { SpinalContext, SpinalGraph, SpinalNode } from 'spinal-env-viewer-graph-service';
+import SpinalOrganConfigModel from './SpinalOrganConfigModel';
 
 class SpinalDisoverModel extends Model {
-   constructor(graph, contextInfo, network, organ) {
+   constructor(graph: SpinalGraph<any>, contextInfo: { id: string; name: string; type: string }, network: { id: string; name: string; type: string }, organ: SpinalOrganConfigModel) {
       super();
 
       this.add_attr({
@@ -18,38 +20,38 @@ class SpinalDisoverModel extends Model {
       })
    }
 
-   setDiscoveringMode() {
+   public setDiscoveringMode(): void {
       this.state.set(STATES.discovering);
       // setTimeout(() => {
       //    if (this.state.get() === STATES.discovering) this.setTimeoutMode();
       // }, 40000)
    }
 
-   setDiscoveredMode() {
+   public setDiscoveredMode(): void {
       this.state.set(STATES.discovered);
    }
 
-   setResetedMode() {
+   public setResetedMode(): void {
       this.state.set(STATES.reseted);
    }
 
-   setTimeoutMode() {
+   public setTimeoutMode(): void {
       this.state.set(STATES.timeout);
    }
 
-   setCreatingMode() {
+   public setCreatingMode(): void {
       this.state.set(STATES.creating);
    }
 
-   setCreatedMode() {
+   public setCreatedMode(): void {
       this.state.set(STATES.created);
    }
 
-   setErrorMode() {
+   public setErrorMode(): void {
       this.state.set(STATES.error);
    }
 
-   addToGraph() {
+   public addToGraph(): Promise<boolean> {
       if (!this.organ.discover) {
          const x = new Lst();
          x.push(this);
@@ -67,8 +69,8 @@ class SpinalDisoverModel extends Model {
       }
    }
 
-   remove() {
-      // this.graph.load(graph => {
+   public remove(): Promise<boolean> {
+
       return new Promise((resolve, reject) => {
          this.organ.discover.load((list) => {
             for (let i = 0; i < list.length; i++) {
@@ -80,8 +82,6 @@ class SpinalDisoverModel extends Model {
             }
          });
       });
-
-      // })
 
    }
 

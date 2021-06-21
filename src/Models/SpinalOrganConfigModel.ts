@@ -1,4 +1,5 @@
 import { spinalCore, Model, Ptr, Lst } from 'spinal-core-connectorjs_type';
+import { SpinalNode } from 'spinal-env-viewer-graph-service';
 import { v4 as uuidv4 } from "uuid";
 
 const BACNET_ORGAN_TYPE = "BACNET_ORGAN";
@@ -21,7 +22,7 @@ class SpinalOrganConfigModel extends Model {
       })
    }
 
-   addReference(contextId: string, spinalNode: any) {
+   public addReference(contextId: string, spinalNode: SpinalNode<any>): Promise<SpinalNode<any>> {
 
       if (this.references[contextId]) {
          return new Promise((resolve, reject) => {
@@ -38,7 +39,7 @@ class SpinalOrganConfigModel extends Model {
       return Promise.resolve(spinalNode);
    }
 
-   isReferencedInContext(contextId) {
+   public isReferencedInContext(contextId: string): Promise<boolean> {
       if (typeof this.references[contextId] === "undefined") return Promise.resolve(false);
 
       return new Promise((resolve, reject) => {
@@ -50,7 +51,7 @@ class SpinalOrganConfigModel extends Model {
 
    }
 
-   removeReference(contextId: string) {
+   public removeReference(contextId: string): Promise<SpinalNode<any>> {
       if (this.references[contextId]) {
          return new Promise((resolve, reject) => {
             this.references[contextId].load(node => {
@@ -59,19 +60,6 @@ class SpinalOrganConfigModel extends Model {
             })
          });
       }
-      // this.references.load((ref) => {
-      //    if (typeof spinalNode === "undefined" && ref[contextId]) {
-      //       ref.rem_attr(contextId);
-      //       return;
-      //    } else if (ref[contextId]) {
-      //       for (let i = 0; i < ref[contextId].length; i++) {
-      //          const element = ref[contextId][i];
-      //          if (spinalNode._server_id === element._server_id) {
-      //             ref[contextId].splice(i);
-      //          }
-      //       }
-      //    }
-      // })
    }
 }
 

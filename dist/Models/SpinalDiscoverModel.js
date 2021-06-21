@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SpinalDisoverModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
-const stateEnum_1 = require("./stateEnum");
+const stateEnum_1 = require("../stateEnum");
 const uuid_1 = require("uuid");
 class SpinalDisoverModel extends spinal_core_connectorjs_type_1.Model {
     constructor(graph, contextInfo, network, organ) {
@@ -61,7 +61,6 @@ class SpinalDisoverModel extends spinal_core_connectorjs_type_1.Model {
         }
     }
     remove() {
-        // this.graph.load(graph => {
         return new Promise((resolve, reject) => {
             this.organ.discover.load((list) => {
                 for (let i = 0; i < list.length; i++) {
@@ -73,7 +72,6 @@ class SpinalDisoverModel extends spinal_core_connectorjs_type_1.Model {
                 }
             });
         });
-        // })
     }
 }
 exports.SpinalDisoverModel = SpinalDisoverModel;

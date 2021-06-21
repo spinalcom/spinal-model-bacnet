@@ -1,9 +1,10 @@
 import { spinalCore, Model, Ptr, Choice } from 'spinal-core-connectorjs_type';
 import { SpinalContext, SpinalGraph, SpinalNode } from 'spinal-env-viewer-graph-service';
 import { v4 as uuidv4 } from "uuid";
+import SpinalOrganConfigModel from './SpinalOrganConfigModel';
 
 class SpinalBacnetValueModel extends Model {
-   constructor(graph: SpinalGraph<any>, context: SpinalContext<any>, organ: SpinalNode<any>, network: SpinalNode<any>, node: SpinalNode<any>, sensor: any) {
+   constructor(graph: SpinalGraph<any>, context: SpinalContext<any>, organ: SpinalNode<any>, network: SpinalNode<any>, node: SpinalNode<any>, sensor: number[]) {
       super();
       this.add_attr({
          id: uuidv4(),
@@ -36,7 +37,7 @@ class SpinalBacnetValueModel extends Model {
       context: SpinalContext<any>;
       graph: SpinalGraph<any>;
       network: SpinalNode<any>;
-      organ: any;
+      organ: SpinalOrganConfigModel;
    }> {
       const promises = [this.loadItem('context'), this.loadItem('node'), this.loadItem('graph'), this.loadItem('network'), this.loadItem('organ')];
       return Promise.all(promises).then(([context, node, graph, network, organ]) => {

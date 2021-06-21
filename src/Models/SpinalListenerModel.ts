@@ -2,9 +2,11 @@ import { spinalCore, Model, Ptr } from 'spinal-core-connectorjs_type';
 import { SpinalGraph } from 'spinal-model-graph';
 import SpinalOrganConfigModel from './SpinalOrganConfigModel';
 import { v4 as uuidv4 } from "uuid";
+import { SpinalContext, SpinalNode } from 'spinal-env-viewer-graph-service';
+import SpinalMonitorInfoModel from './SpinalMonitorInfoModel';
 
 class SpinalListenerModel extends Model {
-   constructor(graph: SpinalGraph<any>, context: any, network: any, bmsDeviceInfo: any, organ: SpinalOrganConfigModel, monitor: any) {
+   constructor(graph: SpinalGraph<any>, context: SpinalContext<any>, network: SpinalNode<any>, bmsDevice: SpinalNode<any>, organ: SpinalOrganConfigModel, monitor: SpinalMonitorInfoModel) {
       super();
 
       this.add_attr({
@@ -13,7 +15,7 @@ class SpinalListenerModel extends Model {
          listen: true,
          saveTimeSeries: false,
          // timeInterval: timeInterval,
-         device: new Ptr(bmsDeviceInfo),
+         device: new Ptr(bmsDevice),
          context: new Ptr(context),
          network: new Ptr(network),
          organ: new Ptr(organ),

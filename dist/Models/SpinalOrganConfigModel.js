@@ -50,19 +50,6 @@ class SpinalOrganConfigModel extends spinal_core_connectorjs_type_1.Model {
                 });
             });
         }
-        // this.references.load((ref) => {
-        //    if (typeof spinalNode === "undefined" && ref[contextId]) {
-        //       ref.rem_attr(contextId);
-        //       return;
-        //    } else if (ref[contextId]) {
-        //       for (let i = 0; i < ref[contextId].length; i++) {
-        //          const element = ref[contextId][i];
-        //          if (spinalNode._server_id === element._server_id) {
-        //             ref[contextId].splice(i);
-        //          }
-        //       }
-        //    }
-        // })
     }
 }
 exports.SpinalOrganConfigModel = SpinalOrganConfigModel;
