@@ -15,6 +15,10 @@ class SpinalMonitorInfoModel extends Model {
       })
    }
 
+   public getMonitoringData(): Array<{ monitor: boolean, interval: number, children: [] }> {
+      return this.data.get();
+   }
+
 }
 
 

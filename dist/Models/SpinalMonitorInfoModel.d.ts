@@ -6,6 +6,11 @@ declare class SpinalMonitorInfoModel extends Model {
         interval: number;
         children: [];
     }>);
+    getMonitoringData(): Array<{
+        monitor: boolean;
+        interval: number;
+        children: [];
+    }>;
 }
 export default SpinalMonitorInfoModel;
 export { SpinalMonitorInfoModel };

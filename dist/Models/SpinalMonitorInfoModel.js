@@ -12,6 +12,9 @@ class SpinalMonitorInfoModel extends spinal_core_connectorjs_type_1.Model {
             data: monit
         });
     }
+    getMonitoringData() {
+        return this.data.get();
+    }
 }
 exports.SpinalMonitorInfoModel = SpinalMonitorInfoModel;
 spinal_core_connectorjs_type_1.spinalCore.register_models([SpinalMonitorInfoModel]);
