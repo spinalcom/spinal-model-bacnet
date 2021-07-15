@@ -2,14 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SpinalDisoverModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
-const stateEnum_1 = require("../stateEnum");
+const StateEnum_1 = require("../Data/StateEnum");
 const uuid_1 = require("uuid");
 class SpinalDisoverModel extends spinal_core_connectorjs_type_1.Model {
     constructor(graph, contextInfo, network, organ) {
         super();
         this.add_attr({
             id: uuid_1.v4(),
-            state: stateEnum_1.STATES.reseted,
+            state: StateEnum_1.STATES.reseted,
             graph: graph ? new spinal_core_connectorjs_type_1.Ptr(graph) : undefined,
             devices: new spinal_core_connectorjs_type_1.Lst(),
             context: contextInfo || {},
@@ -19,28 +19,28 @@ class SpinalDisoverModel extends spinal_core_connectorjs_type_1.Model {
         });
     }
     setDiscoveringMode() {
-        this.state.set(stateEnum_1.STATES.discovering);
+        this.state.set(StateEnum_1.STATES.discovering);
         // setTimeout(() => {
         //    if (this.state.get() === STATES.discovering) this.setTimeoutMode();
         // }, 40000)
     }
     setDiscoveredMode() {
-        this.state.set(stateEnum_1.STATES.discovered);
+        this.state.set(StateEnum_1.STATES.discovered);
     }
     setResetedMode() {
-        this.state.set(stateEnum_1.STATES.reseted);
+        this.state.set(StateEnum_1.STATES.reseted);
     }
     setTimeoutMode() {
-        this.state.set(stateEnum_1.STATES.timeout);
+        this.state.set(StateEnum_1.STATES.timeout);
     }
     setCreatingMode() {
-        this.state.set(stateEnum_1.STATES.creating);
+        this.state.set(StateEnum_1.STATES.creating);
     }
     setCreatedMode() {
-        this.state.set(stateEnum_1.STATES.created);
+        this.state.set(StateEnum_1.STATES.created);
     }
     setErrorMode() {
-        this.state.set(stateEnum_1.STATES.error);
+        this.state.set(StateEnum_1.STATES.error);
     }
     addToGraph() {
         if (!this.organ.discover) {

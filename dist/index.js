@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BACNET_ORGAN_TYPE = exports.STATES = exports.SpinalMonitorInfoModel = exports.SpinalBacnetValueModel = exports.SpinalOrganConfigModel = exports.SpinalListenerModel = exports.SpinalDisoverModel = void 0;
+exports.BACNET_ORGAN_TYPE = exports.STATES = exports.SpinalPilotModel = exports.SpinalMonitorInfoModel = exports.SpinalBacnetValueModel = exports.SpinalOrganConfigModel = exports.SpinalListenerModel = exports.SpinalDisoverModel = void 0;
 const SpinalDiscoverModel_1 = require("./Models/SpinalDiscoverModel");
 Object.defineProperty(exports, "SpinalDisoverModel", { enumerable: true, get: function () { return SpinalDiscoverModel_1.SpinalDisoverModel; } });
 const SpinalListenerModel_1 = require("./Models/SpinalListenerModel");
@@ -12,6 +12,8 @@ const SpinalBacnetValueModel_1 = require("./Models/SpinalBacnetValueModel");
 Object.defineProperty(exports, "SpinalBacnetValueModel", { enumerable: true, get: function () { return SpinalBacnetValueModel_1.SpinalBacnetValueModel; } });
 const SpinalMonitorInfoModel_1 = require("./Models/SpinalMonitorInfoModel");
 Object.defineProperty(exports, "SpinalMonitorInfoModel", { enumerable: true, get: function () { return SpinalMonitorInfoModel_1.SpinalMonitorInfoModel; } });
-const stateEnum_1 = require("./stateEnum");
-Object.defineProperty(exports, "STATES", { enumerable: true, get: function () { return stateEnum_1.STATES; } });
+const SpinalPilotModel_1 = require("./Models/SpinalPilotModel");
+Object.defineProperty(exports, "SpinalPilotModel", { enumerable: true, get: function () { return SpinalPilotModel_1.SpinalPilotModel; } });
+const StateEnum_1 = require("./Data/StateEnum");
+Object.defineProperty(exports, "STATES", { enumerable: true, get: function () { return StateEnum_1.STATES; } });
 //# sourceMappingURL=index.js.map

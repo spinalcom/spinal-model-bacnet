@@ -11,4 +11,4 @@ var STATES;
     STATES[STATES["creating"] = 4] = "creating";
     STATES[STATES["created"] = 5] = "created";
 })(STATES = exports.STATES || (exports.STATES = {}));
-//# sourceMappingURL=stateEnum.js.map
+//# sourceMappingURL=StateEnum.js.map

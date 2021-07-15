@@ -1,5 +1,5 @@
 import { spinalCore, Model, Ptr, Lst } from 'spinal-core-connectorjs_type';
-import { STATES } from "../stateEnum";
+import { STATES } from "../Data/StateEnum";
 import { v4 as uuidv4 } from "uuid";
 import { SpinalContext, SpinalGraph, SpinalNode } from 'spinal-env-viewer-graph-service';
 import SpinalOrganConfigModel from './SpinalOrganConfigModel';
