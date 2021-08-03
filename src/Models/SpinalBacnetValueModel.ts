@@ -21,12 +21,14 @@ class SpinalBacnetValueModel extends Model {
 
    public addToNode(): Promise<void> {
       return this.loadItem('node').then((node: any) => {
+
          node.info.add_attr({ bacnet: new Ptr(this) });
       })
    }
 
    public remToNode(): Promise<void> {
       return this.loadItem('node').then((node: any) => {
+         if(node.info.bacnet) node.info.rem_attr("bacnet");
          node.info.rem_attr('bacnet');
       })
 

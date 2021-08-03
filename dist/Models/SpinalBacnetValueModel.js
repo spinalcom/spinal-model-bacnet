@@ -25,6 +25,8 @@ class SpinalBacnetValueModel extends spinal_core_connectorjs_type_1.Model {
     }
     remToNode() {
         return this.loadItem('node').then((node) => {
+            if (node.info.bacnet)
+                node.info.rem_attr("bacnet");
             node.info.rem_attr('bacnet');
         });
     }
