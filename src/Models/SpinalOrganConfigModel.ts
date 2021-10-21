@@ -1,8 +1,8 @@
 import { spinalCore, Model, Ptr, Lst } from 'spinal-core-connectorjs_type';
 import { SpinalNode } from 'spinal-env-viewer-graph-service';
 import { v4 as uuidv4 } from "uuid";
+import { BACNET_ORGAN_TYPE } from "../Data/constants";
 
-const BACNET_ORGAN_TYPE = "BACNET_ORGAN";
 
 class SpinalOrganConfigModel extends Model {
 
@@ -66,4 +66,4 @@ class SpinalOrganConfigModel extends Model {
 
 spinalCore.register_models([SpinalOrganConfigModel])
 export default SpinalOrganConfigModel;
-export { SpinalOrganConfigModel, BACNET_ORGAN_TYPE }
+export { SpinalOrganConfigModel }

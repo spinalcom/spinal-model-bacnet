@@ -1,12 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BACNET_ORGAN_TYPE = exports.SpinalOrganConfigModel = void 0;
+exports.SpinalOrganConfigModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
 const uuid_1 = require("uuid");
-const BACNET_ORGAN_TYPE = "BACNET_ORGAN";
-exports.BACNET_ORGAN_TYPE = BACNET_ORGAN_TYPE;
+const constants_1 = require("../Data/constants");
 class SpinalOrganConfigModel extends spinal_core_connectorjs_type_1.Model {
-    constructor(name, type = BACNET_ORGAN_TYPE) {
+    constructor(name, type = constants_1.BACNET_ORGAN_TYPE) {
         super();
         this.add_attr({
             id: uuid_1.v4(),
@@ -53,7 +52,7 @@ class SpinalOrganConfigModel extends spinal_core_connectorjs_type_1.Model {
     }
 }
 exports.SpinalOrganConfigModel = SpinalOrganConfigModel;
-SpinalOrganConfigModel.TYPE = BACNET_ORGAN_TYPE;
+SpinalOrganConfigModel.TYPE = constants_1.BACNET_ORGAN_TYPE;
 SpinalOrganConfigModel.CONTEXT_TO_ORGAN_RELATION = "hasBmsNetworkOrgan";
 spinal_core_connectorjs_type_1.spinalCore.register_models([SpinalOrganConfigModel]);
 exports.default = SpinalOrganConfigModel;
