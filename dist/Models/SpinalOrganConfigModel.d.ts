@@ -4,7 +4,7 @@ declare const BACNET_ORGAN_TYPE = "BACNET_ORGAN";
 declare class SpinalOrganConfigModel extends Model {
     static TYPE: string;
     static CONTEXT_TO_ORGAN_RELATION: string;
-    constructor(name: string);
+    constructor(name: string, type?: string);
     addReference(contextId: string, spinalNode: SpinalNode<any>): Promise<SpinalNode<any>>;
     isReferencedInContext(contextId: string): Promise<boolean>;
     removeReference(contextId: string): Promise<SpinalNode<any>>;

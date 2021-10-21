@@ -10,13 +10,13 @@ class SpinalOrganConfigModel extends Model {
    static CONTEXT_TO_ORGAN_RELATION: string = "hasBmsNetworkOrgan";
 
 
-   constructor(name: string) {
+   constructor(name: string, type: string = BACNET_ORGAN_TYPE) {
       super();
 
       this.add_attr({
          id: uuidv4(),
-         name: name,
-         type: BACNET_ORGAN_TYPE,
+         name,
+         type,
          references: {},
          restart: false,
       })

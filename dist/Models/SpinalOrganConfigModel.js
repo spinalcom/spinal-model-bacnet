@@ -6,12 +6,12 @@ const uuid_1 = require("uuid");
 const BACNET_ORGAN_TYPE = "BACNET_ORGAN";
 exports.BACNET_ORGAN_TYPE = BACNET_ORGAN_TYPE;
 class SpinalOrganConfigModel extends spinal_core_connectorjs_type_1.Model {
-    constructor(name) {
+    constructor(name, type = BACNET_ORGAN_TYPE) {
         super();
         this.add_attr({
             id: uuid_1.v4(),
-            name: name,
-            type: BACNET_ORGAN_TYPE,
+            name,
+            type,
             references: {},
             restart: false,
         });
