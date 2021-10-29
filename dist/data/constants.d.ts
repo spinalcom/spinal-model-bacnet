@@ -1,0 +1,2 @@
+declare const BACNET_ORGAN_TYPE = "BACNET_ORGAN";
+export { BACNET_ORGAN_TYPE };

@@ -22,30 +22,13 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 
-// Bacnet
-import { SpinalDisoverModel } from "./models/SpinalDiscoverModel";
-import { SpinalListenerModel } from "./models/SpinalListenerModel";
-import { SpinalBacnetValueModel } from "./models/SpinalBacnetValueModel"
-import { SpinalMonitorInfoModel } from "./models/SpinalMonitorInfoModel";
-import { SpinalPilotModel } from "./models/SpinalPilotModel";
 
-
-// Organ
-import { SpinalOrganConfigModel } from "./models/SpinalOrganConfigModel";
-
-// Data
-import { STATES } from "./data/StateEnum";
-import { IRequest } from "./data/IRequest";
-import { BACNET_ORGAN_TYPE } from "./data/constants";
-
-export {
-   SpinalDisoverModel,
-   SpinalListenerModel,
-   SpinalOrganConfigModel,
-   SpinalBacnetValueModel,
-   SpinalMonitorInfoModel,
-   SpinalPilotModel,
-   STATES,
-   IRequest,
-   BACNET_ORGAN_TYPE
+export enum STATES {
+   error = -1,
+   reseted = 0,
+   discovering = 1,
+   discovered = 2,
+   timeout = 3,
+   creating = 4,
+   created = 5
 }
