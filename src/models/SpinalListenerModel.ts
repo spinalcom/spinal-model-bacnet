@@ -22,7 +22,7 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 
-import { spinalCore, Model, Ptr } from 'spinal-core-connectorjs_type';
+import { spinalCore, Model, Ptr, Pbr } from 'spinal-core-connectorjs_type';
 import { SpinalGraph } from 'spinal-model-graph';
 import SpinalOrganConfigModel from './SpinalOrganConfigModel';
 import { v4 as uuidv4 } from "uuid";
@@ -35,14 +35,14 @@ class SpinalListenerModel extends Model {
 
       this.add_attr({
          id: uuidv4(),
-         graph: new Ptr(graph),
+         graph: new Pbr(graph),
          listen: true,
          saveTimeSeries: false,
          // timeInterval: timeInterval,
-         device: new Ptr(bmsDevice),
-         context: new Ptr(context),
-         network: new Ptr(network),
-         organ: new Ptr(organ),
+         device: new Pbr(bmsDevice),
+         context: new Pbr(context),
+         network: new Pbr(network),
+         organ: new Pbr(organ),
          monitor: monitor
       })
    }

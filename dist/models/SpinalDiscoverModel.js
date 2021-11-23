@@ -32,7 +32,7 @@ class SpinalDisoverModel extends spinal_core_connectorjs_type_1.Model {
         this.add_attr({
             id: uuid_1.v4(),
             state: StateEnum_1.STATES.reseted,
-            graph: graph ? new spinal_core_connectorjs_type_1.Ptr(graph) : undefined,
+            graph: graph ? new spinal_core_connectorjs_type_1.Pbr(graph) : undefined,
             devices: new spinal_core_connectorjs_type_1.Lst(),
             context: contextInfo || {},
             network: network || {},

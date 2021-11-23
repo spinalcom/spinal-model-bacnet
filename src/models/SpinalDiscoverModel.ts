@@ -22,7 +22,7 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 
-import { spinalCore, Model, Ptr, Lst } from 'spinal-core-connectorjs_type';
+import { spinalCore, Model, Ptr, Lst, Pbr } from 'spinal-core-connectorjs_type';
 import { STATES } from "../data/StateEnum";
 import { v4 as uuidv4 } from "uuid";
 import { SpinalGraph } from 'spinal-env-viewer-graph-service';
@@ -35,7 +35,7 @@ class SpinalDisoverModel extends Model {
       this.add_attr({
          id: uuidv4(),
          state: STATES.reseted,
-         graph: graph ? new Ptr(graph) : undefined,
+         graph: graph ? new Pbr(graph) : undefined,
          devices: new Lst(),
          context: contextInfo || {},
          network: network || {},

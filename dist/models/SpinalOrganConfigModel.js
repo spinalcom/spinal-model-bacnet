@@ -43,12 +43,12 @@ class SpinalOrganConfigModel extends spinal_core_connectorjs_type_1.Model {
                 this.references[contextId].load((e) => {
                     if (typeof e !== "undefined")
                         return reject("The organ is already linked to this context");
-                    this.references.mod_attr(contextId, new spinal_core_connectorjs_type_1.Ptr(spinalNode));
+                    this.references.mod_attr(contextId, new spinal_core_connectorjs_type_1.Pbr(spinalNode));
                     resolve(spinalNode);
                 });
             });
         }
-        this.references.add_attr({ [contextId]: new spinal_core_connectorjs_type_1.Ptr(spinalNode) });
+        this.references.add_attr({ [contextId]: new spinal_core_connectorjs_type_1.Pbr(spinalNode) });
         return Promise.resolve(spinalNode);
     }
     isReferencedInContext(contextId) {

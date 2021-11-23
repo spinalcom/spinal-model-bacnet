@@ -30,14 +30,14 @@ class SpinalListenerModel extends spinal_core_connectorjs_type_1.Model {
         super();
         this.add_attr({
             id: uuid_1.v4(),
-            graph: new spinal_core_connectorjs_type_1.Ptr(graph),
+            graph: new spinal_core_connectorjs_type_1.Pbr(graph),
             listen: true,
             saveTimeSeries: false,
             // timeInterval: timeInterval,
-            device: new spinal_core_connectorjs_type_1.Ptr(bmsDevice),
-            context: new spinal_core_connectorjs_type_1.Ptr(context),
-            network: new spinal_core_connectorjs_type_1.Ptr(network),
-            organ: new spinal_core_connectorjs_type_1.Ptr(organ),
+            device: new spinal_core_connectorjs_type_1.Pbr(bmsDevice),
+            context: new spinal_core_connectorjs_type_1.Pbr(context),
+            network: new spinal_core_connectorjs_type_1.Pbr(network),
+            organ: new spinal_core_connectorjs_type_1.Pbr(organ),
             monitor: monitor
         });
     }

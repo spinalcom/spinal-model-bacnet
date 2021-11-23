@@ -22,7 +22,7 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 
-import { spinalCore, Model, Ptr, Lst } from 'spinal-core-connectorjs_type';
+import { Model, Pbr, spinalCore } from 'spinal-core-connectorjs_type';
 import { SpinalNode } from 'spinal-env-viewer-graph-service';
 import { v4 as uuidv4 } from "uuid";
 import { BACNET_ORGAN_TYPE } from "../data/constants";
@@ -52,14 +52,14 @@ class SpinalOrganConfigModel extends Model {
          return new Promise((resolve, reject) => {
             this.references[contextId].load((e) => {
                if (typeof e !== "undefined") return reject("The organ is already linked to this context");
-               this.references.mod_attr(contextId, new Ptr(spinalNode));
+               this.references.mod_attr(contextId, new Pbr(spinalNode));
                resolve(spinalNode);
             })
          });
 
       }
 
-      this.references.add_attr({ [contextId]: new Ptr(spinalNode) })
+      this.references.add_attr({ [contextId]: new Pbr(spinalNode) })
       return Promise.resolve(spinalNode);
    }
 
@@ -90,4 +90,4 @@ class SpinalOrganConfigModel extends Model {
 
 spinalCore.register_models([SpinalOrganConfigModel])
 export default SpinalOrganConfigModel;
-export { SpinalOrganConfigModel }
+export { SpinalOrganConfigModel };

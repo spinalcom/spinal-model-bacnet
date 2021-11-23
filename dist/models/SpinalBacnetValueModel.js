@@ -30,11 +30,11 @@ class SpinalBacnetValueModel extends spinal_core_connectorjs_type_1.Model {
         super();
         this.add_attr({
             id: uuid_1.v4(),
-            context: new spinal_core_connectorjs_type_1.Ptr(context),
-            node: new spinal_core_connectorjs_type_1.Ptr(node),
-            graph: new spinal_core_connectorjs_type_1.Ptr(graph),
-            network: new spinal_core_connectorjs_type_1.Ptr(network),
-            organ: new spinal_core_connectorjs_type_1.Ptr(organ),
+            context: new spinal_core_connectorjs_type_1.Pbr(context),
+            node: new spinal_core_connectorjs_type_1.Pbr(node),
+            graph: new spinal_core_connectorjs_type_1.Pbr(graph),
+            network: new spinal_core_connectorjs_type_1.Pbr(network),
+            organ: new spinal_core_connectorjs_type_1.Pbr(organ),
             state: 'wait',
             sensor: sensor,
             progress: 0

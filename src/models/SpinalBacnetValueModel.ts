@@ -22,7 +22,7 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 
-import { spinalCore, Model, Ptr, Choice } from 'spinal-core-connectorjs_type';
+import { spinalCore, Model, Ptr, Pbr, Choice } from 'spinal-core-connectorjs_type';
 import { SpinalContext, SpinalGraph, SpinalNode } from 'spinal-env-viewer-graph-service';
 import { v4 as uuidv4 } from "uuid";
 import SpinalOrganConfigModel from './SpinalOrganConfigModel';
@@ -32,11 +32,11 @@ class SpinalBacnetValueModel extends Model {
       super();
       this.add_attr({
          id: uuidv4(),
-         context: new Ptr(context),
-         node: new Ptr(node),
-         graph: new Ptr(graph),
-         network: new Ptr(network),
-         organ: new Ptr(organ),
+         context: new Pbr(context),
+         node: new Pbr(node),
+         graph: new Pbr(graph),
+         network: new Pbr(network),
+         organ: new Pbr(organ),
          state: 'wait',
          sensor: sensor,
          progress: 0
