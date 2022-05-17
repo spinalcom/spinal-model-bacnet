@@ -23,13 +23,14 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SpinalMonitorInfoModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
 const uuid_1 = require("uuid");
 class SpinalMonitorInfoModel extends spinal_core_connectorjs_type_1.Model {
     constructor(profil, monit) {
         super();
         this.add_attr({
-            id: uuid_1.v4(),
+            id: (0, uuid_1.v4)(),
             profil: new spinal_core_connectorjs_type_1.Pbr(profil),
             data: monit
         });

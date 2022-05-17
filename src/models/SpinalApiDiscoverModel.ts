@@ -28,8 +28,8 @@ import { v4 as uuidv4 } from "uuid";
 import { SpinalGraph } from 'spinal-env-viewer-graph-service';
 import SpinalOrganConfigModel from './SpinalOrganConfigModel';
 
-class SpinalDisoverModel extends Model {
-   constructor(graph: SpinalGraph<any>, contextInfo: { id: string; name: string; type: string }, network: { id: string; name: string; type: string }, organ: SpinalOrganConfigModel) {
+class SpinalApiDiscoverModel extends Model {
+   constructor(graph: SpinalGraph<any>, contextInfo: { id: string; name: string; type: string }, apiServerInfo: { id: string; name: string; type: string }, organ: SpinalOrganConfigModel) {
       super();
 
       this.add_attr({
@@ -38,7 +38,7 @@ class SpinalDisoverModel extends Model {
          graph: graph ? new Pbr(graph) : undefined,
          devices: new Lst(),
          context: contextInfo || {},
-         network: network || {},
+         network: apiServerInfo || {},
          organ: organ,
          creation: Date.now()
       })
@@ -108,6 +108,6 @@ class SpinalDisoverModel extends Model {
 }
 
 
-spinalCore.register_models([SpinalDisoverModel])
-export default SpinalDisoverModel;
-export { SpinalDisoverModel }
+spinalCore.register_models([SpinalApiDiscoverModel])
+export default SpinalApiDiscoverModel;
+export { SpinalApiDiscoverModel }

@@ -1,10 +1,12 @@
 import { SpinalDisoverModel } from "./models/SpinalDiscoverModel";
+import { SpinalApiDiscoverModel } from "./models/SpinalApiDiscoverModel";
 import { SpinalListenerModel } from "./models/SpinalListenerModel";
 import { SpinalBacnetValueModel } from "./models/SpinalBacnetValueModel";
 import { SpinalMonitorInfoModel } from "./models/SpinalMonitorInfoModel";
 import { SpinalPilotModel } from "./models/SpinalPilotModel";
 import { SpinalOrganConfigModel } from "./models/SpinalOrganConfigModel";
 import { STATES } from "./data/StateEnum";
+import { DISCOVERY_METHOD } from "./data/DiscoveryEnum";
 import { IRequest } from "./data/IRequest";
 import { BACNET_ORGAN_TYPE } from "./data/constants";
-export { SpinalDisoverModel, SpinalListenerModel, SpinalOrganConfigModel, SpinalBacnetValueModel, SpinalMonitorInfoModel, SpinalPilotModel, STATES, IRequest, BACNET_ORGAN_TYPE };
+export { SpinalDisoverModel, SpinalApiDiscoverModel, SpinalListenerModel, SpinalOrganConfigModel, SpinalBacnetValueModel, SpinalMonitorInfoModel, SpinalPilotModel, STATES, DISCOVERY_METHOD, IRequest, BACNET_ORGAN_TYPE };

@@ -23,15 +23,11 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.STATES = void 0;
-var STATES;
-(function (STATES) {
-    STATES[STATES["error"] = -1] = "error";
-    STATES[STATES["reseted"] = 0] = "reseted";
-    STATES[STATES["discovering"] = 1] = "discovering";
-    STATES[STATES["discovered"] = 2] = "discovered";
-    STATES[STATES["timeout"] = 3] = "timeout";
-    STATES[STATES["creating"] = 4] = "creating";
-    STATES[STATES["created"] = 5] = "created";
-})(STATES = exports.STATES || (exports.STATES = {}));
-//# sourceMappingURL=StateEnum.js.map
+exports.DISCOVERY_METHOD = void 0;
+var DISCOVERY_METHOD;
+(function (DISCOVERY_METHOD) {
+    DISCOVERY_METHOD[DISCOVERY_METHOD["broadcast"] = 0] = "broadcast";
+    DISCOVERY_METHOD[DISCOVERY_METHOD["unicast"] = 1] = "unicast";
+    DISCOVERY_METHOD[DISCOVERY_METHOD["api"] = 2] = "api";
+})(DISCOVERY_METHOD = exports.DISCOVERY_METHOD || (exports.DISCOVERY_METHOD = {}));
+//# sourceMappingURL=DiscoveryEnum.js.map

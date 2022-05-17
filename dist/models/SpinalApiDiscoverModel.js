@@ -23,12 +23,12 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SpinalDisoverModel = void 0;
+exports.SpinalApiDiscoverModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
 const StateEnum_1 = require("../data/StateEnum");
 const uuid_1 = require("uuid");
-class SpinalDisoverModel extends spinal_core_connectorjs_type_1.Model {
-    constructor(graph, contextInfo, network, organ) {
+class SpinalApiDiscoverModel extends spinal_core_connectorjs_type_1.Model {
+    constructor(graph, contextInfo, apiServerInfo, organ) {
         super();
         this.add_attr({
             id: (0, uuid_1.v4)(),
@@ -36,7 +36,7 @@ class SpinalDisoverModel extends spinal_core_connectorjs_type_1.Model {
             graph: graph ? new spinal_core_connectorjs_type_1.Pbr(graph) : undefined,
             devices: new spinal_core_connectorjs_type_1.Lst(),
             context: contextInfo || {},
-            network: network || {},
+            network: apiServerInfo || {},
             organ: organ,
             creation: Date.now()
         });
@@ -94,7 +94,7 @@ class SpinalDisoverModel extends spinal_core_connectorjs_type_1.Model {
         });
     }
 }
-exports.SpinalDisoverModel = SpinalDisoverModel;
-spinal_core_connectorjs_type_1.spinalCore.register_models([SpinalDisoverModel]);
-exports.default = SpinalDisoverModel;
-//# sourceMappingURL=SpinalDiscoverModel.js.map
+exports.SpinalApiDiscoverModel = SpinalApiDiscoverModel;
+spinal_core_connectorjs_type_1.spinalCore.register_models([SpinalApiDiscoverModel]);
+exports.default = SpinalApiDiscoverModel;
+//# sourceMappingURL=SpinalApiDiscoverModel.js.map

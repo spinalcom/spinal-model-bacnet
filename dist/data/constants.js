@@ -23,6 +23,7 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.BACNET_ORGAN_TYPE = void 0;
 const BACNET_ORGAN_TYPE = "BACNET_ORGAN";
 exports.BACNET_ORGAN_TYPE = BACNET_ORGAN_TYPE;
 //# sourceMappingURL=constants.js.map
