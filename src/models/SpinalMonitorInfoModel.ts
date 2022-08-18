@@ -45,7 +45,7 @@ class SpinalMonitorInfoModel extends Model {
 
 }
 
-
+//@ts-ignore
 spinalCore.register_models([SpinalMonitorInfoModel])
 export default SpinalMonitorInfoModel;
 export { SpinalMonitorInfoModel }

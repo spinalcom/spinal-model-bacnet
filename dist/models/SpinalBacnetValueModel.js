@@ -23,6 +23,7 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SpinalBacnetValueModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
 const uuid_1 = require("uuid");
 class SpinalBacnetValueModel extends spinal_core_connectorjs_type_1.Model {
@@ -91,6 +92,7 @@ class SpinalBacnetValueModel extends spinal_core_connectorjs_type_1.Model {
     }
 }
 exports.SpinalBacnetValueModel = SpinalBacnetValueModel;
+//@ts-ignore
 spinal_core_connectorjs_type_1.spinalCore.register_models([SpinalBacnetValueModel]);
 exports.default = SpinalBacnetValueModel;
 //# sourceMappingURL=SpinalBacnetValueModel.js.map

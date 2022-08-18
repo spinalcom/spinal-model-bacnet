@@ -48,7 +48,7 @@ class SpinalListenerModel extends Model {
    }
 }
 
-
+//@ts-ignore
 spinalCore.register_models([SpinalListenerModel])
 export default SpinalListenerModel;
 export { SpinalListenerModel }

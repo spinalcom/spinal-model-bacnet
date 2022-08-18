@@ -111,7 +111,7 @@ class SpinalDisoverModel extends Model {
 
 }
 
-
+//@ts-ignore
 spinalCore.register_models([SpinalDisoverModel])
 export default SpinalDisoverModel;
 export { SpinalDisoverModel }

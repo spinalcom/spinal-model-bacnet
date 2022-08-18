@@ -112,7 +112,7 @@ class SpinalBacnetValueModel extends Model {
 
 }
 
-
+//@ts-ignore
 spinalCore.register_models([SpinalBacnetValueModel])
 export default SpinalBacnetValueModel;
 export { SpinalBacnetValueModel }

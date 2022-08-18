@@ -87,7 +87,7 @@ class SpinalOrganConfigModel extends Model {
    }
 }
 
-
+//@ts-ignore
 spinalCore.register_models([SpinalOrganConfigModel])
 export default SpinalOrganConfigModel;
 export { SpinalOrganConfigModel };

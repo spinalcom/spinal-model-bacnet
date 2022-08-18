@@ -23,6 +23,7 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SpinalOrganConfigModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
 const uuid_1 = require("uuid");
 const constants_1 = require("../data/constants");
@@ -76,6 +77,7 @@ class SpinalOrganConfigModel extends spinal_core_connectorjs_type_1.Model {
 exports.SpinalOrganConfigModel = SpinalOrganConfigModel;
 SpinalOrganConfigModel.TYPE = constants_1.BACNET_ORGAN_TYPE;
 SpinalOrganConfigModel.CONTEXT_TO_ORGAN_RELATION = "hasBmsNetworkOrgan";
+//@ts-ignore
 spinal_core_connectorjs_type_1.spinalCore.register_models([SpinalOrganConfigModel]);
 exports.default = SpinalOrganConfigModel;
 //# sourceMappingURL=SpinalOrganConfigModel.js.map

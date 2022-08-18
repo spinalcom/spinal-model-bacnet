@@ -1,12 +1,15 @@
 {
    "compilerOptions": {
+
       "target": "es2015",
       "module": "commonjs",
       "outDir": "dist",
-      "noImplicitAny": false,
       "skipLibCheck": true,
+      "noImplicitAny": false,
       "declaration": true,
-      "sourceMap": true
+      "declarationDir": "declarations",
+      "sourceMap": true,
+      "skipDefaultLibCheck": true
    },
    "include": [
       "src/**/*.ts",

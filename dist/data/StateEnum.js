@@ -23,6 +23,7 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.STATES = void 0;
 var STATES;
 (function (STATES) {
     STATES[STATES["error"] = -1] = "error";

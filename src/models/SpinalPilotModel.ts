@@ -99,7 +99,7 @@ class SpinalPilotModel extends Model {
       });
    }
 }
-
+//@ts-ignore
 spinalCore.register_models([SpinalPilotModel])
 export default SpinalPilotModel;
 export { SpinalPilotModel };

@@ -23,6 +23,7 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SpinalDisoverModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
 const StateEnum_1 = require("../data/StateEnum");
 const uuid_1 = require("uuid");
@@ -97,6 +98,7 @@ class SpinalDisoverModel extends spinal_core_connectorjs_type_1.Model {
     }
 }
 exports.SpinalDisoverModel = SpinalDisoverModel;
+//@ts-ignore
 spinal_core_connectorjs_type_1.spinalCore.register_models([SpinalDisoverModel]);
 exports.default = SpinalDisoverModel;
 //# sourceMappingURL=SpinalDiscoverModel.js.map
