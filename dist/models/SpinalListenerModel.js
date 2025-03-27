@@ -29,8 +29,10 @@ const uuid_1 = require("uuid");
 class SpinalListenerModel extends spinal_core_connectorjs_type_1.Model {
     constructor(graph, context, network, bmsDevice, organ, monitor) {
         super();
+        if (!graph || !context || !network || !bmsDevice || !organ || !monitor)
+            return;
         this.add_attr({
-            id: uuid_1.v4(),
+            id: (0, uuid_1.v4)(),
             graph: new spinal_core_connectorjs_type_1.Pbr(graph),
             listen: true,
             saveTimeSeries: false,
@@ -44,7 +46,6 @@ class SpinalListenerModel extends spinal_core_connectorjs_type_1.Model {
     }
 }
 exports.SpinalListenerModel = SpinalListenerModel;
-//@ts-ignore
 spinal_core_connectorjs_type_1.spinalCore.register_models([SpinalListenerModel]);
 exports.default = SpinalListenerModel;
 //# sourceMappingURL=SpinalListenerModel.js.map

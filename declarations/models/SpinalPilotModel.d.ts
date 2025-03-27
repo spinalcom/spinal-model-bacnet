@@ -3,7 +3,7 @@ import { SpinalNode } from 'spinal-env-viewer-graph-service';
 import { IRequest } from '../data/IRequest';
 import SpinalOrganConfigModel from './SpinalOrganConfigModel';
 declare class SpinalPilotModel extends Model {
-    constructor(organ: SpinalOrganConfigModel, request: IRequest | IRequest[]);
+    constructor(organ?: SpinalOrganConfigModel, request?: IRequest | IRequest[]);
     setNormalMode(): void;
     setProcessMode(): void;
     setSuccessMode(): void;

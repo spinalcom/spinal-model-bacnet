@@ -29,8 +29,10 @@ const uuid_1 = require("uuid");
 class SpinalMonitorInfoModel extends spinal_core_connectorjs_type_1.Model {
     constructor(profil, monit) {
         super();
+        if (!profil || !monit)
+            return;
         this.add_attr({
-            id: uuid_1.v4(),
+            id: (0, uuid_1.v4)(),
             profil: new spinal_core_connectorjs_type_1.Pbr(profil),
             data: monit
         });
@@ -40,7 +42,6 @@ class SpinalMonitorInfoModel extends spinal_core_connectorjs_type_1.Model {
     }
 }
 exports.SpinalMonitorInfoModel = SpinalMonitorInfoModel;
-//@ts-ignore
 spinal_core_connectorjs_type_1.spinalCore.register_models([SpinalMonitorInfoModel]);
 exports.default = SpinalMonitorInfoModel;
 //# sourceMappingURL=SpinalMonitorInfoModel.js.map

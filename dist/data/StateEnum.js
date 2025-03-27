@@ -33,5 +33,5 @@ var STATES;
     STATES[STATES["timeout"] = 3] = "timeout";
     STATES[STATES["creating"] = 4] = "creating";
     STATES[STATES["created"] = 5] = "created";
-})(STATES = exports.STATES || (exports.STATES = {}));
+})(STATES || (exports.STATES = STATES = {}));
 //# sourceMappingURL=StateEnum.js.map

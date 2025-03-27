@@ -30,8 +30,10 @@ const constants_1 = require("../data/constants");
 class SpinalOrganConfigModel extends spinal_core_connectorjs_type_1.Model {
     constructor(name, type = constants_1.BACNET_ORGAN_TYPE) {
         super();
+        if (!name)
+            return;
         this.add_attr({
-            id: uuid_1.v4(),
+            id: (0, uuid_1.v4)(),
             name,
             type,
             references: {},

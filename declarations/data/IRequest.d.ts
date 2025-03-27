@@ -1,5 +1,6 @@
 export interface IRequest {
     address: string;
+    SADR?: any;
     deviceId: number | string;
     objectId: {
         type: number | string;

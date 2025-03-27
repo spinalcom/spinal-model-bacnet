@@ -29,8 +29,10 @@ const uuid_1 = require("uuid");
 class SpinalBacnetValueModel extends spinal_core_connectorjs_type_1.Model {
     constructor(graph, context, organ, network, node, sensor) {
         super();
+        if (!graph || !context || !organ || !network || !node || !sensor)
+            return;
         this.add_attr({
-            id: uuid_1.v4(),
+            id: (0, uuid_1.v4)(),
             context: new spinal_core_connectorjs_type_1.Pbr(context),
             node: new spinal_core_connectorjs_type_1.Pbr(node),
             graph: new spinal_core_connectorjs_type_1.Pbr(graph),
@@ -92,7 +94,6 @@ class SpinalBacnetValueModel extends spinal_core_connectorjs_type_1.Model {
     }
 }
 exports.SpinalBacnetValueModel = SpinalBacnetValueModel;
-//@ts-ignore
 spinal_core_connectorjs_type_1.spinalCore.register_models([SpinalBacnetValueModel]);
 exports.default = SpinalBacnetValueModel;
 //# sourceMappingURL=SpinalBacnetValueModel.js.map

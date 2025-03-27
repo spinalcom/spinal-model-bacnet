@@ -29,8 +29,9 @@ import { SpinalGraph } from 'spinal-env-viewer-graph-service';
 import SpinalOrganConfigModel from './SpinalOrganConfigModel';
 
 class SpinalDisoverModel extends Model {
-   constructor(graph: SpinalGraph<any>, contextInfo: { id: string; name: string; type: string }, network: { id: string; name: string; type: string }, organ: SpinalOrganConfigModel) {
+   constructor(graph?: SpinalGraph<any>, contextInfo?: { id: string; name: string; type: string }, network?: { id: string; name: string; type: string }, organ?: SpinalOrganConfigModel) {
       super();
+      if (!graph || !contextInfo || !network || !organ) return;
 
       this.add_attr({
          id: uuidv4(),
@@ -111,7 +112,6 @@ class SpinalDisoverModel extends Model {
 
 }
 
-//@ts-ignore
 spinalCore.register_models([SpinalDisoverModel])
 export default SpinalDisoverModel;
 export { SpinalDisoverModel }

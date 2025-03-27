@@ -30,8 +30,9 @@ import { SpinalContext, SpinalNode } from 'spinal-env-viewer-graph-service';
 import SpinalMonitorInfoModel from './SpinalMonitorInfoModel';
 
 class SpinalListenerModel extends Model {
-   constructor(graph: SpinalGraph<any>, context: SpinalContext<any>, network: SpinalNode<any>, bmsDevice: SpinalNode<any>, organ: SpinalOrganConfigModel, monitor: SpinalMonitorInfoModel) {
+   constructor(graph?: SpinalGraph<any>, context?: SpinalContext<any>, network?: SpinalNode<any>, bmsDevice?: SpinalNode<any>, organ?: SpinalOrganConfigModel, monitor?: SpinalMonitorInfoModel) {
       super();
+      if (!graph || !context || !network || !bmsDevice || !organ || !monitor) return;
 
       this.add_attr({
          id: uuidv4(),
@@ -48,7 +49,6 @@ class SpinalListenerModel extends Model {
    }
 }
 
-//@ts-ignore
 spinalCore.register_models([SpinalListenerModel])
 export default SpinalListenerModel;
 export { SpinalListenerModel }

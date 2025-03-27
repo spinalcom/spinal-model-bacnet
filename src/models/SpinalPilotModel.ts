@@ -30,8 +30,11 @@ import SpinalOrganConfigModel from './SpinalOrganConfigModel';
 
 
 class SpinalPilotModel extends Model {
-   constructor(organ: SpinalOrganConfigModel, request: IRequest | IRequest[]) {
+   constructor(organ?: SpinalOrganConfigModel, request?: IRequest | IRequest[]) {
       super();
+
+      if (!organ || !request) return;
+
       this.add_attr({
          id: uuidv4(),
          state: new Choice(0, ["normal", "process", "success", "error"]),

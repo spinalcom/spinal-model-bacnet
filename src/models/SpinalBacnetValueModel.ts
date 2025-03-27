@@ -28,8 +28,11 @@ import { v4 as uuidv4 } from "uuid";
 import SpinalOrganConfigModel from './SpinalOrganConfigModel';
 
 class SpinalBacnetValueModel extends Model {
-   constructor(graph: SpinalGraph<any>, context: SpinalContext<any>, organ: SpinalNode<any>, network: SpinalNode<any>, node: SpinalNode<any>, sensor: number[]) {
+   constructor(graph?: SpinalGraph<any>, context?: SpinalContext<any>, organ?: SpinalNode<any>, network?: SpinalNode<any>, node?: SpinalNode<any>, sensor?: number[]) {
       super();
+
+      if (!graph || !context || !organ || !network || !node || !sensor) return;
+
       this.add_attr({
          id: uuidv4(),
          context: new Pbr(context),
@@ -112,7 +115,6 @@ class SpinalBacnetValueModel extends Model {
 
 }
 
-//@ts-ignore
 spinalCore.register_models([SpinalBacnetValueModel])
 export default SpinalBacnetValueModel;
 export { SpinalBacnetValueModel }

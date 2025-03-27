@@ -30,8 +30,10 @@ const uuid_1 = require("uuid");
 class SpinalDisoverModel extends spinal_core_connectorjs_type_1.Model {
     constructor(graph, contextInfo, network, organ) {
         super();
+        if (!graph || !contextInfo || !network || !organ)
+            return;
         this.add_attr({
-            id: uuid_1.v4(),
+            id: (0, uuid_1.v4)(),
             state: StateEnum_1.STATES.reseted,
             graph: graph ? new spinal_core_connectorjs_type_1.Pbr(graph) : undefined,
             devices: new spinal_core_connectorjs_type_1.Lst(),
@@ -98,7 +100,6 @@ class SpinalDisoverModel extends spinal_core_connectorjs_type_1.Model {
     }
 }
 exports.SpinalDisoverModel = SpinalDisoverModel;
-//@ts-ignore
 spinal_core_connectorjs_type_1.spinalCore.register_models([SpinalDisoverModel]);
 exports.default = SpinalDisoverModel;
 //# sourceMappingURL=SpinalDiscoverModel.js.map
