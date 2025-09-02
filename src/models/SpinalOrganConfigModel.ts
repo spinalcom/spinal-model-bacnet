@@ -22,10 +22,15 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 
-import { Model, Pbr, spinalCore } from 'spinal-core-connectorjs_type';
+import { Lst, Model, Pbr, spinalCore } from 'spinal-core-connectorjs_type';
 import { SpinalNode } from 'spinal-env-viewer-graph-service';
 import { v4 as uuidv4 } from "uuid";
 import { BACNET_ORGAN_TYPE } from "../data/constants";
+import SpinalDisoverModel from './SpinalDiscoverModel';
+import SpinalPilotModel from './SpinalPilotModel';
+import SpinalListenerModel from './SpinalListenerModel';
+import SpinalBacnetValueModel from './SpinalBacnetValueModel';
+import ModelsInfo from './modelsToBind';
 
 
 class SpinalOrganConfigModel extends Model {
@@ -45,8 +50,24 @@ class SpinalOrganConfigModel extends Model {
          type,
          references: {},
          restart: false,
+         discover: new ModelsInfo<SpinalDisoverModel>(),
+			pilot: new ModelsInfo<SpinalPilotModel>(),
+			listener: new ModelsInfo<SpinalListenerModel>(),
+			allbacnetCommand: new ModelsInfo<SpinalBacnetValueModel>(),
       })
    }
+
+   private _initializeModelsList() {
+		if (!this.discover) this.add_attr({ discover: new ModelsInfo<SpinalDisoverModel>() });
+		if (!this.pilot) this.add_attr({ pilot: new ModelsInfo<SpinalPilotModel>() });
+		if (!this.listener) this.add_attr({ listener: new ModelsInfo<SpinalListenerModel>() });
+		if (!this.allbacnetCommand) this.add_attr({ allbacnetCommand: new ModelsInfo<SpinalBacnetValueModel>() });
+	}
+
+   public getModels(): { discover: ModelsInfo<SpinalDisoverModel>, pilot: ModelsInfo<SpinalPilotModel>, listener: ModelsInfo<SpinalListenerModel> , allbacnetCommand: ModelsInfo<SpinalBacnetValueModel> } {
+		this._initializeModelsList();
+		return { discover: this.discover, pilot: this.pilot, listener: this.listener, allbacnetCommand: this.allbacnetCommand };
+	}
 
    public addReference(contextId: string, spinalNode: SpinalNode<any>): Promise<SpinalNode<any>> {
 
@@ -87,6 +108,95 @@ class SpinalOrganConfigModel extends Model {
          });
       }
    }
+
+   //// ADD MODELS
+
+	public addDiscoverModelToGraph(discoverModel: SpinalDisoverModel): Promise<number> {
+		this._initializeModelsList();
+		return this.discover.addModel(discoverModel);
+	}
+
+	public addPilotModelToGraph(pilotModel: SpinalPilotModel): Promise<number> {
+		this._initializeModelsList();
+		return this.pilot.addModel(pilotModel);
+	}
+
+	public addListenerModelToGraph(listenerModel: SpinalListenerModel): Promise<number> {
+		this._initializeModelsList();
+		return this.listener.addModel(listenerModel);
+	}
+
+   public addAllBacnetModelToGraph(bacnetValueModel: SpinalBacnetValueModel): Promise<number> {
+		this._initializeModelsList();
+		return this.allbacnetCommand.addModel(bacnetValueModel);
+	}
+
+
+    //// REMOVE MODELS
+
+	public removeDiscoverModelFromGraph(discoverModel: SpinalDisoverModel): Promise<boolean> {
+		if(this.discover) return this.discover.removeModel(discoverModel);
+	}
+
+	public removePilotModelFromGraph(pilotModel: SpinalPilotModel): Promise<boolean> {
+		if(this.pilot) return this.pilot.removeModel(pilotModel);
+	}
+
+	public removeListenerModelFromGraph(listenerModel: SpinalListenerModel): Promise<boolean> {
+		this._initializeModelsList();
+		if(this.listener) return this.listener.removeModel(listenerModel);
+	}
+
+   public removebacnetValueModelFromGraph(bacnetValueModel: SpinalBacnetValueModel): Promise<boolean> {
+		this._initializeModelsList();
+		if(this.allbacnetCommand) return this.allbacnetCommand.removeModel(bacnetValueModel);
+	}
+
+	  //// GET MODELS
+
+	public getDiscoverModelFromGraph(): Promise<Lst<SpinalDisoverModel>> {
+		this._initializeModelsList();
+		return this.discover.getModels();
+	}
+
+	public getPilotModelFromGraph(): Promise<Lst<SpinalPilotModel>> {
+		this._initializeModelsList();
+		return this.pilot.getModels();
+	}
+
+	public getListenerModelFromGraph(): Promise<Lst<SpinalListenerModel>> {
+		this._initializeModelsList();
+		return this.listener.getModels();
+	}
+
+   public getBacnetValueModelFromGraph(): Promise<Lst<SpinalBacnetValueModel>> {
+		this._initializeModelsList();
+		return this.allbacnetCommand.getModels();
+	}
+
+	///// CONSUME MODELS
+
+	public consumeDiscoverModelFromGraph(): Promise<SpinalDisoverModel[]> {
+		this._initializeModelsList();
+		return this.discover.consumeModels();
+	}
+
+	public consumePilotModelFromGraph(): Promise<SpinalPilotModel[]> {
+		this._initializeModelsList();
+		return this.pilot.consumeModels();
+	}
+
+	public consumeListenerModelFromGraph(): Promise<SpinalListenerModel[]> {
+		this._initializeModelsList();
+		return this.listener.consumeModels();
+	}
+
+   public consumeBacnetValueModelFromGraph(): Promise<SpinalBacnetValueModel[]> {
+		this._initializeModelsList();
+		return this.allbacnetCommand.consumeModels();
+	}
+
+
 }
 
 //@ts-ignore

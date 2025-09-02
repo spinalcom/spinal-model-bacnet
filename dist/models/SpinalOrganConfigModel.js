@@ -27,6 +27,7 @@ exports.SpinalOrganConfigModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
 const uuid_1 = require("uuid");
 const constants_1 = require("../data/constants");
+const modelsToBind_1 = require("./modelsToBind");
 class SpinalOrganConfigModel extends spinal_core_connectorjs_type_1.Model {
     constructor(name, type = constants_1.BACNET_ORGAN_TYPE) {
         super();
@@ -38,7 +39,25 @@ class SpinalOrganConfigModel extends spinal_core_connectorjs_type_1.Model {
             type,
             references: {},
             restart: false,
+            discover: new modelsToBind_1.default(),
+            pilot: new modelsToBind_1.default(),
+            listener: new modelsToBind_1.default(),
+            allbacnetCommand: new modelsToBind_1.default(),
         });
+    }
+    _initializeModelsList() {
+        if (!this.discover)
+            this.add_attr({ discover: new modelsToBind_1.default() });
+        if (!this.pilot)
+            this.add_attr({ pilot: new modelsToBind_1.default() });
+        if (!this.listener)
+            this.add_attr({ listener: new modelsToBind_1.default() });
+        if (!this.allbacnetCommand)
+            this.add_attr({ allbacnetCommand: new modelsToBind_1.default() });
+    }
+    getModels() {
+        this._initializeModelsList();
+        return { discover: this.discover, pilot: this.pilot, listener: this.listener, allbacnetCommand: this.allbacnetCommand };
     }
     addReference(contextId, spinalNode) {
         if (this.references[contextId]) {
@@ -74,6 +93,76 @@ class SpinalOrganConfigModel extends spinal_core_connectorjs_type_1.Model {
                 });
             });
         }
+    }
+    //// ADD MODELS
+    addDiscoverModelToGraph(discoverModel) {
+        this._initializeModelsList();
+        return this.discover.addModel(discoverModel);
+    }
+    addPilotModelToGraph(pilotModel) {
+        this._initializeModelsList();
+        return this.pilot.addModel(pilotModel);
+    }
+    addListenerModelToGraph(listenerModel) {
+        this._initializeModelsList();
+        return this.listener.addModel(listenerModel);
+    }
+    addAllBacnetModelToGraph(bacnetValueModel) {
+        this._initializeModelsList();
+        return this.allbacnetCommand.addModel(bacnetValueModel);
+    }
+    //// REMOVE MODELS
+    removeDiscoverModelFromGraph(discoverModel) {
+        if (this.discover)
+            return this.discover.removeModel(discoverModel);
+    }
+    removePilotModelFromGraph(pilotModel) {
+        if (this.pilot)
+            return this.pilot.removeModel(pilotModel);
+    }
+    removeListenerModelFromGraph(listenerModel) {
+        this._initializeModelsList();
+        if (this.listener)
+            return this.listener.removeModel(listenerModel);
+    }
+    removebacnetValueModelFromGraph(bacnetValueModel) {
+        this._initializeModelsList();
+        if (this.allbacnetCommand)
+            return this.allbacnetCommand.removeModel(bacnetValueModel);
+    }
+    //// GET MODELS
+    getDiscoverModelFromGraph() {
+        this._initializeModelsList();
+        return this.discover.getModels();
+    }
+    getPilotModelFromGraph() {
+        this._initializeModelsList();
+        return this.pilot.getModels();
+    }
+    getListenerModelFromGraph() {
+        this._initializeModelsList();
+        return this.listener.getModels();
+    }
+    getBacnetValueModelFromGraph() {
+        this._initializeModelsList();
+        return this.allbacnetCommand.getModels();
+    }
+    ///// CONSUME MODELS
+    consumeDiscoverModelFromGraph() {
+        this._initializeModelsList();
+        return this.discover.consumeModels();
+    }
+    consumePilotModelFromGraph() {
+        this._initializeModelsList();
+        return this.pilot.consumeModels();
+    }
+    consumeListenerModelFromGraph() {
+        this._initializeModelsList();
+        return this.listener.consumeModels();
+    }
+    consumeBacnetValueModelFromGraph() {
+        this._initializeModelsList();
+        return this.allbacnetCommand.consumeModels();
     }
 }
 exports.SpinalOrganConfigModel = SpinalOrganConfigModel;

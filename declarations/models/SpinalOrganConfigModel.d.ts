@@ -1,12 +1,40 @@
-import { Model } from 'spinal-core-connectorjs_type';
+import { Lst, Model } from 'spinal-core-connectorjs_type';
 import { SpinalNode } from 'spinal-env-viewer-graph-service';
+import SpinalDisoverModel from './SpinalDiscoverModel';
+import SpinalPilotModel from './SpinalPilotModel';
+import SpinalListenerModel from './SpinalListenerModel';
+import SpinalBacnetValueModel from './SpinalBacnetValueModel';
+import ModelsInfo from './modelsToBind';
 declare class SpinalOrganConfigModel extends Model {
     static TYPE: string;
     static CONTEXT_TO_ORGAN_RELATION: string;
     constructor(name?: string, type?: string);
+    private _initializeModelsList;
+    getModels(): {
+        discover: ModelsInfo<SpinalDisoverModel>;
+        pilot: ModelsInfo<SpinalPilotModel>;
+        listener: ModelsInfo<SpinalListenerModel>;
+        allbacnetCommand: ModelsInfo<SpinalBacnetValueModel>;
+    };
     addReference(contextId: string, spinalNode: SpinalNode<any>): Promise<SpinalNode<any>>;
     isReferencedInContext(contextId: string): Promise<boolean>;
     removeReference(contextId: string): Promise<SpinalNode<any>>;
+    addDiscoverModelToGraph(discoverModel: SpinalDisoverModel): Promise<number>;
+    addPilotModelToGraph(pilotModel: SpinalPilotModel): Promise<number>;
+    addListenerModelToGraph(listenerModel: SpinalListenerModel): Promise<number>;
+    addAllBacnetModelToGraph(bacnetValueModel: SpinalBacnetValueModel): Promise<number>;
+    removeDiscoverModelFromGraph(discoverModel: SpinalDisoverModel): Promise<boolean>;
+    removePilotModelFromGraph(pilotModel: SpinalPilotModel): Promise<boolean>;
+    removeListenerModelFromGraph(listenerModel: SpinalListenerModel): Promise<boolean>;
+    removebacnetValueModelFromGraph(bacnetValueModel: SpinalBacnetValueModel): Promise<boolean>;
+    getDiscoverModelFromGraph(): Promise<Lst<SpinalDisoverModel>>;
+    getPilotModelFromGraph(): Promise<Lst<SpinalPilotModel>>;
+    getListenerModelFromGraph(): Promise<Lst<SpinalListenerModel>>;
+    getBacnetValueModelFromGraph(): Promise<Lst<SpinalBacnetValueModel>>;
+    consumeDiscoverModelFromGraph(): Promise<SpinalDisoverModel[]>;
+    consumePilotModelFromGraph(): Promise<SpinalPilotModel[]>;
+    consumeListenerModelFromGraph(): Promise<SpinalListenerModel[]>;
+    consumeBacnetValueModelFromGraph(): Promise<SpinalBacnetValueModel[]>;
 }
 export default SpinalOrganConfigModel;
 export { SpinalOrganConfigModel };

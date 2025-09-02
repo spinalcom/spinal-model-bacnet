@@ -68,34 +68,13 @@ class SpinalDisoverModel extends spinal_core_connectorjs_type_1.Model {
         this.state.set(StateEnum_1.STATES.error);
     }
     addToGraph() {
-        if (!this.organ.discover) {
-            const x = new spinal_core_connectorjs_type_1.Lst();
-            x.push(this);
-            this.organ.add_attr({
-                discover: new spinal_core_connectorjs_type_1.Ptr(x),
-            });
-            Promise.resolve(true);
-        }
-        else {
-            return new Promise((resolve, reject) => {
-                this.organ.discover.load((list) => {
-                    list.push(this);
-                    resolve(true);
-                });
-            });
-        }
+        return this.getOrgan().then((organ) => {
+            return organ.addDiscoverModelToGraph(this);
+        });
     }
     remove() {
-        return new Promise((resolve, reject) => {
-            this.organ.discover.load((list) => {
-                for (let i = 0; i < list.length; i++) {
-                    const element = list[i];
-                    if (element._server_id === this._server_id) {
-                        list.splice(i);
-                        return resolve(true);
-                    }
-                }
-            });
+        return this.getOrgan().then((organ) => {
+            return organ.removeDiscoverModelFromGraph(this);
         });
     }
 }

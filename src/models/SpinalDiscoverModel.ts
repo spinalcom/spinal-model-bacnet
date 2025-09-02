@@ -76,39 +76,53 @@ class SpinalDisoverModel extends Model {
       this.state.set(STATES.error);
    }
 
-   public addToGraph(): Promise<boolean> {
-      if (!this.organ.discover) {
-         const x = new Lst();
-         x.push(this);
-         this.organ.add_attr({
-            discover: new Ptr(x),
-         });
-         Promise.resolve(true);
-      } else {
-         return new Promise((resolve, reject) => {
-            this.organ.discover.load((list) => {
-               list.push(this);
-               resolve(true);
-            });
-         });
-      }
-   }
+   public addToGraph(): Promise<number> {
+		return this.getOrgan().then((organ: SpinalOrganConfigModel) => {
+			return organ.addDiscoverModelToGraph(this);
+		});
+	}
 
    public remove(): Promise<boolean> {
+		return this.getOrgan().then((organ: SpinalOrganConfigModel) => {
+			return organ.removeDiscoverModelFromGraph(this);
+		});
+	}
 
-      return new Promise((resolve, reject) => {
-         this.organ.discover.load((list) => {
-            for (let i = 0; i < list.length; i++) {
-               const element = list[i];
-               if (element._server_id === this._server_id) {
-                  list.splice(i);
-                  return resolve(true);
-               }
-            }
-         });
-      });
+   // public addToGraph(): Promise<boolean> {
+   //    if (!this.organ.discover) {
+   //       const x = new Lst();
+   //       x.push(this);
+   //       this.organ.add_attr({
+   //          discover: new Ptr(x),
+   //       });
+   //       Promise.resolve(true);
+   //    } else {
+   //       return new Promise((resolve, reject) => {
+   //          this.organ.discover.load((list) => {
+   //             list.push(this);
+   //             resolve(true);
+   //          });
+   //       });
+   //    }
+   // }
 
-   }
+   // public remove(): Promise<boolean> {
+
+   //    return new Promise((resolve, reject) => {
+   //       this.organ.discover.load((list) => {
+   //          for (let i = 0; i < list.length; i++) {
+   //             const element = list[i];
+   //             if (element._server_id === this._server_id) {
+   //                list.splice(i);
+   //                return resolve(true);
+   //             }
+   //          }
+   //       });
+   //    });
+
+   // }
+
+
 
 }
 

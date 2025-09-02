@@ -1,3 +1,4 @@
+import { SpinalNode } from "spinal-env-viewer-graph-service";
 export interface IRequest {
     address: string;
     SADR?: any;
@@ -7,4 +8,12 @@ export interface IRequest {
         instance: number | string;
     };
     value: string | number | boolean;
+}
+export interface IDataNodes {
+    graph: SpinalNode;
+    organ: SpinalNode;
+    context: SpinalNode;
+    device: SpinalNode;
+    network: SpinalNode;
+    profile: SpinalNode;
 }

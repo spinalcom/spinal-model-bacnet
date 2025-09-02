@@ -58,7 +58,6 @@ class SpinalBacnetValueModel extends Model {
          if (node.info.bacnet) node.info.rem_attr("bacnet");
          node.info.rem_attr('bacnet');
       })
-
    }
 
    public getAllItem(): Promise<{

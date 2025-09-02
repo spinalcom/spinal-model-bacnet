@@ -18,7 +18,7 @@ declare class SpinalDisoverModel extends Model {
     setCreatingMode(): void;
     setCreatedMode(): void;
     setErrorMode(): void;
-    addToGraph(): Promise<boolean>;
+    addToGraph(): Promise<number>;
     remove(): Promise<boolean>;
 }
 export default SpinalDisoverModel;
