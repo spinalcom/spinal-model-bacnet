@@ -46,14 +46,36 @@ class SpinalBacnetValueModel extends Model {
       })
    }
 
+   public addToGraph(): Promise<number> {
+      return this.loadItem("organ").then(async (organ: SpinalNode<any>) => {
+         const organElement = await organ.getElement(true);
+         if(organElement){
+            const length = await organElement.addAllBacnetModelToGraph(this);
+            await this.addToNode();
+            return length;
+         }
+      })
+   }
+
+   public removeFromGraph(): Promise<boolean> {
+      return this.loadItem("organ").then(async (organ: SpinalNode<any>) => {
+         const organElement = await organ.getElement(true);
+         if(organElement){
+            const removed = await organElement.removebacnetValueModelFromGraph(this);
+            await this.remFromNode();
+            return removed;
+         }
+      })
+   }
+
    public addToNode(): Promise<void> {
       return this.loadItem('node').then((node: any) => {
-
+         
          node.info.add_attr({ bacnet: new Ptr(this) });
       })
    }
 
-   public remToNode(): Promise<void> {
+   public remFromNode(): Promise<void> {
       return this.loadItem('node').then((node: any) => {
          if (node.info.bacnet) node.info.rem_attr("bacnet");
          node.info.rem_attr('bacnet');

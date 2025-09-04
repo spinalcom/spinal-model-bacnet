@@ -3,8 +3,10 @@ import { SpinalContext, SpinalGraph, SpinalNode } from 'spinal-env-viewer-graph-
 import SpinalOrganConfigModel from './SpinalOrganConfigModel';
 declare class SpinalBacnetValueModel extends Model {
     constructor(graph?: SpinalGraph<any>, context?: SpinalContext<any>, organ?: SpinalNode<any>, network?: SpinalNode<any>, node?: SpinalNode<any>, sensor?: number[]);
+    addToGraph(): Promise<number>;
+    removeFromGraph(): Promise<boolean>;
     addToNode(): Promise<void>;
-    remToNode(): Promise<void>;
+    remFromNode(): Promise<void>;
     getAllItem(): Promise<{
         node: SpinalNode<any>;
         context: SpinalContext<any>;

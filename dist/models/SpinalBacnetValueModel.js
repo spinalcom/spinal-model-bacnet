@@ -22,6 +22,15 @@
  * with this file. If not, see
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SpinalBacnetValueModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
@@ -43,12 +52,32 @@ class SpinalBacnetValueModel extends spinal_core_connectorjs_type_1.Model {
             progress: 0
         });
     }
+    addToGraph() {
+        return this.loadItem("organ").then((organ) => __awaiter(this, void 0, void 0, function* () {
+            const organElement = yield organ.getElement(true);
+            if (organElement) {
+                const length = yield organElement.addAllBacnetModelToGraph(this);
+                yield this.addToNode();
+                return length;
+            }
+        }));
+    }
+    removeFromGraph() {
+        return this.loadItem("organ").then((organ) => __awaiter(this, void 0, void 0, function* () {
+            const organElement = yield organ.getElement(true);
+            if (organElement) {
+                const removed = yield organElement.removebacnetValueModelFromGraph(this);
+                yield this.remFromNode();
+                return removed;
+            }
+        }));
+    }
     addToNode() {
         return this.loadItem('node').then((node) => {
             node.info.add_attr({ bacnet: new spinal_core_connectorjs_type_1.Ptr(this) });
         });
     }
-    remToNode() {
+    remFromNode() {
         return this.loadItem('node').then((node) => {
             if (node.info.bacnet)
                 node.info.rem_attr("bacnet");

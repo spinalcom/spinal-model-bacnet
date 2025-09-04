@@ -45,15 +45,15 @@ class SpinalOrganConfigModel extends Model {
       if (!name) return;
 
       this.add_attr({
-         id: uuidv4(),
-         name,
-         type,
-         references: {},
-         restart: false,
-         discover: new ModelsInfo<SpinalDisoverModel>(),
-			pilot: new ModelsInfo<SpinalPilotModel>(),
-			listener: new ModelsInfo<SpinalListenerModel>(),
-			allbacnetCommand: new ModelsInfo<SpinalBacnetValueModel>(),
+		id: uuidv4(),
+		name,
+		type,
+		references: {},
+		restart: false,
+		discover: new ModelsInfo<SpinalDisoverModel>(),
+		pilot: new ModelsInfo<SpinalPilotModel>(),
+		listener: new ModelsInfo<SpinalListenerModel>(),
+		allbacnetCommand: new ModelsInfo<SpinalBacnetValueModel>(),
       })
    }
 
