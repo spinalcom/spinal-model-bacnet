@@ -76,6 +76,12 @@ class SpinalDisoverModel extends Model {
       this.state.set(STATES.error);
    }
 
+
+   public async getOrgan() {
+         // use ptr
+         return this.organ;
+   }
+
    public addToGraph(): Promise<number> {
 		return this.getOrgan().then((organ: SpinalOrganConfigModel) => {
 			return organ.addDiscoverModelToGraph(this);

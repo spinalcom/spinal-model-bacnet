@@ -18,6 +18,7 @@ declare class SpinalDisoverModel extends Model {
     setCreatingMode(): void;
     setCreatedMode(): void;
     setErrorMode(): void;
+    getOrgan(): Promise<any>;
     addToGraph(): Promise<number>;
     remove(): Promise<boolean>;
 }
