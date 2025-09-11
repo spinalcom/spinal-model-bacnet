@@ -2,19 +2,19 @@ import { Model } from 'spinal-core-connectorjs_type';
 import { SpinalContext, SpinalGraph, SpinalNode } from 'spinal-env-viewer-graph-service';
 import SpinalOrganConfigModel from './SpinalOrganConfigModel';
 declare class SpinalBacnetValueModel extends Model {
-    constructor(graph?: SpinalGraph<any>, context?: SpinalContext<any>, organ?: SpinalNode<any>, network?: SpinalNode<any>, node?: SpinalNode<any>, sensor?: number[]);
+    constructor(graph?: SpinalGraph, context?: SpinalContext, organ?: SpinalOrganConfigModel, network?: SpinalNode, node?: SpinalNode, sensor?: number[]);
     addToGraph(): Promise<number>;
     removeFromGraph(): Promise<boolean>;
     addToNode(): Promise<void>;
     remFromNode(): Promise<void>;
     getAllItem(): Promise<{
-        node: SpinalNode<any>;
-        context: SpinalContext<any>;
-        graph: SpinalGraph<any>;
-        network: SpinalNode<any>;
+        node: SpinalNode;
+        context: SpinalContext;
+        graph: SpinalGraph;
+        network: SpinalNode;
         organ: SpinalOrganConfigModel;
     }>;
-    loadItem(name: string): Promise<SpinalNode<any> | SpinalContext<any> | SpinalGraph<any> | SpinalNode<any> | any>;
+    loadItem(name: string): Promise<SpinalNode | SpinalContext | SpinalGraph | SpinalNode | any>;
     setWaitState(): void;
     setRecoverState(): void;
     setProgressState(): void;

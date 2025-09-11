@@ -29,7 +29,7 @@ import { v4 as uuidv4 } from "uuid";
 class SpinalMonitorInfoModel extends Model {
 
 
-   constructor(profil?: SpinalNode<any>, monit?: Array<{ monitor: boolean, interval: number, children: [] }>) {
+   constructor(profil?: SpinalNode, monit?: Array<{ monitor: boolean, interval: number, children: [] }>) {
       super();
       if (!profil || !monit) return;
 

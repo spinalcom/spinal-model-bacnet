@@ -29,7 +29,7 @@ import { SpinalGraph } from 'spinal-env-viewer-graph-service';
 import SpinalOrganConfigModel from './SpinalOrganConfigModel';
 
 class SpinalDisoverModel extends Model {
-   constructor(graph?: SpinalGraph<any>, contextInfo?: { id: string; name: string; type: string }, network?: { id: string; name: string; type: string }, organ?: SpinalOrganConfigModel) {
+   constructor(graph?: SpinalGraph, contextInfo?: { id: string; name: string; type: string }, network?: { id: string; name: string; type: string }, organ?: SpinalOrganConfigModel) {
       super();
       if (!graph || !contextInfo || !network || !organ) return;
 
@@ -77,7 +77,7 @@ class SpinalDisoverModel extends Model {
    }
 
 
-   public async getOrgan() {
+   public async getOrgan(): Promise<SpinalOrganConfigModel> {
          // use ptr
          return this.organ;
    }

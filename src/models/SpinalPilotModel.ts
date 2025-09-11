@@ -64,21 +64,26 @@ class SpinalPilotModel extends Model {
       return this.state.get() === "normal";
    }
 
+    public async getOrgan(): Promise<SpinalOrganConfigModel> {
+        return this.organ;
+    }
+
+
    public addToGraph(): Promise<number> {
-        return this.getOrgan().then(async (organNode: SpinalNode) => {
-            const organModel = await organNode.getElement(true);
-            if (organModel) {
+        return this.getOrgan().then(async (organModel: SpinalOrganConfigModel) => {
+            // const organModel = await organNode.getElement(true);
+            // if (organModel) {
                 return organModel.addPilotToGraph(this);
-            }
+            // }
         })
     }
 
     public removeFromGraph(): Promise<boolean> {
-        return this.getOrgan().then(async (organNode: SpinalNode) => {
-            const organModel = await organNode.getElement(true);
-            if (organModel) {
+        return this.getOrgan().then(async (organModel: SpinalOrganConfigModel) => {
+            // const organModel = await organNode.getElement(true);
+            // if (organModel) {
                 return organModel.removePilotModelFromGraph(this);
-            }
+            // }
         })
     }
 

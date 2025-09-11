@@ -53,23 +53,23 @@ class SpinalBacnetValueModel extends spinal_core_connectorjs_type_1.Model {
         });
     }
     addToGraph() {
-        return this.loadItem("organ").then((organ) => __awaiter(this, void 0, void 0, function* () {
-            const organElement = yield organ.getElement(true);
-            if (organElement) {
-                const length = yield organElement.addAllBacnetModelToGraph(this);
-                yield this.addToNode();
-                return length;
-            }
+        return this.loadItem("organ").then((organElement) => __awaiter(this, void 0, void 0, function* () {
+            // const organElement = await organ.getElement(true);
+            // if(organElement){
+            const length = yield organElement.addAllBacnetModelToGraph(this);
+            yield this.addToNode();
+            return length;
+            // }
         }));
     }
     removeFromGraph() {
-        return this.loadItem("organ").then((organ) => __awaiter(this, void 0, void 0, function* () {
-            const organElement = yield organ.getElement(true);
-            if (organElement) {
-                const removed = yield organElement.removebacnetValueModelFromGraph(this);
-                yield this.remFromNode();
-                return removed;
-            }
+        return this.loadItem("organ").then((organElement) => __awaiter(this, void 0, void 0, function* () {
+            // const organElement = await organ.getElement(true);
+            // if(organElement){
+            const removed = yield organElement.removebacnetValueModelFromGraph(this);
+            yield this.remFromNode();
+            return removed;
+            // }
         }));
     }
     addToNode() {

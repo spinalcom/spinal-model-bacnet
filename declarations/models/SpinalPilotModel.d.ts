@@ -9,6 +9,7 @@ declare class SpinalPilotModel extends Model {
     setSuccessMode(): void;
     setErrorMode(): void;
     isNormal(): boolean;
+    getOrgan(): Promise<SpinalOrganConfigModel>;
     addToGraph(): Promise<number>;
     removeFromGraph(): Promise<boolean>;
     addToNode(endpoint: SpinalNode<any>): Promise<any>;

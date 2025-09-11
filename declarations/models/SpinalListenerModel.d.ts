@@ -5,10 +5,10 @@ import { SpinalContext, SpinalNode } from 'spinal-env-viewer-graph-service';
 import SpinalMonitorInfoModel from './SpinalMonitorInfoModel';
 import { IDataNodes } from '../data/IRequest';
 declare class SpinalListenerModel extends Model {
-    constructor(graph?: SpinalGraph<any>, context?: SpinalContext<any>, network?: SpinalNode<any>, bmsDevice?: SpinalNode<any>, organ?: SpinalOrganConfigModel, monitor?: SpinalMonitorInfoModel);
+    constructor(graph?: SpinalGraph, context?: SpinalContext, network?: SpinalNode, bmsDevice?: SpinalNode, organ?: SpinalOrganConfigModel, monitor?: SpinalMonitorInfoModel);
     getAllData(): Promise<IDataNodes>;
-    getGraph(): Promise<SpinalNode>;
-    getOrgan(): Promise<SpinalNode>;
+    getGraph(): Promise<SpinalGraph>;
+    getOrgan(): Promise<SpinalOrganConfigModel>;
     getContext(): Promise<SpinalContext>;
     getBmsDevice(): Promise<SpinalNode>;
     getNetwork(): Promise<SpinalNode>;

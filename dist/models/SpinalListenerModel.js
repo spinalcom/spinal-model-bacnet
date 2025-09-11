@@ -54,9 +54,10 @@ class SpinalListenerModel extends spinal_core_connectorjs_type_1.Model {
         });
     }
     getAllData() {
-        //   const promises = [this.getGraph(), this.getOrgan(), this.getContext(), this.getBmsDevice(), this.getNetwork(), this.getProfile()];
-        const promises = [this.getGraph(), this.getOrgan(), this.getContext(), this.getBmsDevice(), this.getNetwork()];
-        return Promise.all(promises).then(([graph, organ, context, device, network, profile]) => {
+        return __awaiter(this, void 0, void 0, function* () {
+            //   const promises = [this.getGraph(), this.getOrgan(), this.getContext(), this.getBmsDevice(), this.getNetwork(), this.getProfile()];
+            const promises = [this.getGraph(), this.getOrgan(), this.getContext(), this.getBmsDevice(), this.getNetwork()];
+            const [graph, organ, context, device, network, profile] = yield Promise.all(promises);
             return {
                 graph,
                 organ,
@@ -86,22 +87,22 @@ class SpinalListenerModel extends spinal_core_connectorjs_type_1.Model {
     //      return this._loadData('profile');
     //  }
     addToGraph() {
-        return this.getOrgan().then((organNode) => __awaiter(this, void 0, void 0, function* () {
-            const organModel = yield organNode.getElement(true);
-            if (organModel) {
-                yield this.addToDevice(); // add reference to listener in device
-                return organModel.addListenerModelToGraph(this); // add listener to organ listener list
-            }
+        return this.getOrgan().then((organModel) => __awaiter(this, void 0, void 0, function* () {
+            // const organModel = await organNode.getElement(true);
+            // if (organModel) {
+            yield this.addToDevice(); // add reference to listener in device
+            return organModel.addListenerModelToGraph(this); // add listener to organ listener list
+            // }
         }));
     }
     removeFromGraph() {
         const promises = [this.getOrgan(), this.getBmsDevice()];
-        return Promise.all(promises).then(([organNode, deviceNode]) => __awaiter(this, void 0, void 0, function* () {
-            const organModel = yield organNode.getElement(true);
-            if (organModel) {
-                deviceNode.info.remove_attr('listener'); // remove reference to listener in device
-                return organModel.removeListenerModelFromGraph(this); // remove listener from organ listener list
-            }
+        return Promise.all(promises).then(([organModel, deviceNode]) => __awaiter(this, void 0, void 0, function* () {
+            // const organModel = await organNode.getElement(true);
+            // if (organModel) {
+            deviceNode.info.remove_attr('listener'); // remove reference to listener in device
+            return organModel.removeListenerModelFromGraph(this); // remove listener from organ listener list
+            // }
         }));
     }
     addToDevice() {

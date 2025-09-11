@@ -28,7 +28,7 @@ import { v4 as uuidv4 } from "uuid";
 import SpinalOrganConfigModel from './SpinalOrganConfigModel';
 
 class SpinalBacnetValueModel extends Model {
-   constructor(graph?: SpinalGraph<any>, context?: SpinalContext<any>, organ?: SpinalNode<any>, network?: SpinalNode<any>, node?: SpinalNode<any>, sensor?: number[]) {
+   constructor(graph?: SpinalGraph, context?: SpinalContext, organ?: SpinalOrganConfigModel, network?: SpinalNode, node?: SpinalNode, sensor?: number[]) {
       super();
 
       if (!graph || !context || !organ || !network || !node || !sensor) return;
@@ -47,24 +47,24 @@ class SpinalBacnetValueModel extends Model {
    }
 
    public addToGraph(): Promise<number> {
-      return this.loadItem("organ").then(async (organ: SpinalNode<any>) => {
-         const organElement = await organ.getElement(true);
-         if(organElement){
+      return this.loadItem("organ").then(async (organElement: SpinalOrganConfigModel) => {
+         // const organElement = await organ.getElement(true);
+         // if(organElement){
             const length = await organElement.addAllBacnetModelToGraph(this);
             await this.addToNode();
             return length;
-         }
+         // }
       })
    }
 
    public removeFromGraph(): Promise<boolean> {
-      return this.loadItem("organ").then(async (organ: SpinalNode<any>) => {
-         const organElement = await organ.getElement(true);
-         if(organElement){
+      return this.loadItem("organ").then(async (organElement: SpinalOrganConfigModel) => {
+         // const organElement = await organ.getElement(true);
+         // if(organElement){
             const removed = await organElement.removebacnetValueModelFromGraph(this);
             await this.remFromNode();
             return removed;
-         }
+         // }
       })
    }
 
@@ -82,13 +82,7 @@ class SpinalBacnetValueModel extends Model {
       })
    }
 
-   public getAllItem(): Promise<{
-      node: SpinalNode<any>;
-      context: SpinalContext<any>;
-      graph: SpinalGraph<any>;
-      network: SpinalNode<any>;
-      organ: SpinalOrganConfigModel;
-   }> {
+   public getAllItem(): Promise<{node: SpinalNode; context: SpinalContext; graph: SpinalGraph; network: SpinalNode; organ: SpinalOrganConfigModel;}> {
       const promises = [this.loadItem('context'), this.loadItem('node'), this.loadItem('graph'), this.loadItem('network'), this.loadItem('organ')];
       return Promise.all(promises).then(([context, node, graph, network, organ]) => {
          return {
@@ -101,7 +95,7 @@ class SpinalBacnetValueModel extends Model {
       })
    }
 
-   public loadItem(name: string): Promise<SpinalNode<any> | SpinalContext<any> | SpinalGraph<any> | SpinalNode<any> | any> {
+   public loadItem(name: string): Promise<SpinalNode | SpinalContext | SpinalGraph | SpinalNode | any> {
       return new Promise((resolve, reject) => {
          this[name].load((res) => {
             resolve(res);

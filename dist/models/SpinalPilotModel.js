@@ -62,20 +62,25 @@ class SpinalPilotModel extends spinal_core_connectorjs_type_1.Model {
     isNormal() {
         return this.state.get() === "normal";
     }
+    getOrgan() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.organ;
+        });
+    }
     addToGraph() {
-        return this.getOrgan().then((organNode) => __awaiter(this, void 0, void 0, function* () {
-            const organModel = yield organNode.getElement(true);
-            if (organModel) {
-                return organModel.addPilotToGraph(this);
-            }
+        return this.getOrgan().then((organModel) => __awaiter(this, void 0, void 0, function* () {
+            // const organModel = await organNode.getElement(true);
+            // if (organModel) {
+            return organModel.addPilotToGraph(this);
+            // }
         }));
     }
     removeFromGraph() {
-        return this.getOrgan().then((organNode) => __awaiter(this, void 0, void 0, function* () {
-            const organModel = yield organNode.getElement(true);
-            if (organModel) {
-                return organModel.removePilotModelFromGraph(this);
-            }
+        return this.getOrgan().then((organModel) => __awaiter(this, void 0, void 0, function* () {
+            // const organModel = await organNode.getElement(true);
+            // if (organModel) {
+            return organModel.removePilotModelFromGraph(this);
+            // }
         }));
     }
     addToNode(endpoint) {

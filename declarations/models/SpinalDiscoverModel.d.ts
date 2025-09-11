@@ -2,7 +2,7 @@ import { Model } from 'spinal-core-connectorjs_type';
 import { SpinalGraph } from 'spinal-env-viewer-graph-service';
 import SpinalOrganConfigModel from './SpinalOrganConfigModel';
 declare class SpinalDisoverModel extends Model {
-    constructor(graph?: SpinalGraph<any>, contextInfo?: {
+    constructor(graph?: SpinalGraph, contextInfo?: {
         id: string;
         name: string;
         type: string;
@@ -18,7 +18,7 @@ declare class SpinalDisoverModel extends Model {
     setCreatingMode(): void;
     setCreatedMode(): void;
     setErrorMode(): void;
-    getOrgan(): Promise<any>;
+    getOrgan(): Promise<SpinalOrganConfigModel>;
     addToGraph(): Promise<number>;
     remove(): Promise<boolean>;
 }

@@ -22,7 +22,7 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 
-import { spinalCore, Model, Ptr, Pbr } from 'spinal-core-connectorjs_type';
+import { spinalCore, Model, Pbr } from 'spinal-core-connectorjs_type';
 import { SpinalGraph } from 'spinal-model-graph';
 import SpinalOrganConfigModel from './SpinalOrganConfigModel';
 import { v4 as uuidv4 } from "uuid";
@@ -31,7 +31,7 @@ import SpinalMonitorInfoModel from './SpinalMonitorInfoModel';
 import { IDataNodes } from '../data/IRequest';
 
 class SpinalListenerModel extends Model {
-   constructor(graph?: SpinalGraph<any>, context?: SpinalContext<any>, network?: SpinalNode<any>, bmsDevice?: SpinalNode<any>, organ?: SpinalOrganConfigModel, monitor?: SpinalMonitorInfoModel) {
+   constructor(graph?: SpinalGraph, context?: SpinalContext, network?: SpinalNode, bmsDevice?: SpinalNode, organ?: SpinalOrganConfigModel, monitor?: SpinalMonitorInfoModel) {
       super();
       if (!graph || !context || !network || !bmsDevice || !organ || !monitor) return;
 
@@ -49,40 +49,41 @@ class SpinalListenerModel extends Model {
       })
    }
 
-public getAllData(): Promise<IDataNodes> {
+public async getAllData(): Promise<IDataNodes> {
 
       //   const promises = [this.getGraph(), this.getOrgan(), this.getContext(), this.getBmsDevice(), this.getNetwork(), this.getProfile()];
         const promises = [this.getGraph(), this.getOrgan(), this.getContext(), this.getBmsDevice(), this.getNetwork()];
-        return Promise.all(promises).then(([graph, organ, context, device, network, profile]) => {
-            return {
-                graph,
-                organ,
-                context,
-                device,
-                network,
-                profile
-            }
-        })
+
+        const [graph, organ, context, device, network, profile] = await Promise.all(promises);
+
+        return {
+            graph,
+            organ,
+            context,
+            device,
+            network,
+            profile
+        } as IDataNodes;
     }
 
-    public getGraph(): Promise<SpinalNode> {
-        return this._loadData('graph');
+    public getGraph(): Promise<SpinalGraph> {
+        return this._loadData('graph') as Promise<SpinalGraph>;
     }
 
-    public getOrgan(): Promise<SpinalNode> {
-        return this._loadData('organ');
+    public getOrgan(): Promise<SpinalOrganConfigModel> {
+        return this._loadData('organ') as Promise<SpinalOrganConfigModel>;
     }
 
     public getContext(): Promise<SpinalContext> {
-        return this._loadData('context');
+        return this._loadData('context') as Promise<SpinalContext>;
     }
 
     public getBmsDevice(): Promise<SpinalNode> {
-        return this._loadData('bmsDevice');
+        return this._loadData('bmsDevice') as Promise<SpinalNode>;
     }
 
     public getNetwork(): Promise<SpinalNode> {
-        return this._loadData('network');
+        return this._loadData('network') as Promise<SpinalNode>;
     }
 
    //  public getProfile(): Promise<SpinalNode> {
@@ -90,24 +91,24 @@ public getAllData(): Promise<IDataNodes> {
    //  }
 
    public addToGraph(): Promise<number> {
-        return this.getOrgan().then(async (organNode: SpinalNode) => {
-            const organModel = await organNode.getElement(true);
-            if (organModel) {
+        return this.getOrgan().then(async (organModel: SpinalOrganConfigModel) => {
+            // const organModel = await organNode.getElement(true);
+            // if (organModel) {
                 await this.addToDevice(); // add reference to listener in device
                 return organModel.addListenerModelToGraph(this); // add listener to organ listener list
-            }
+            // }
         })
     }
 
     public removeFromGraph(): Promise<boolean> {
         const promises = [this.getOrgan(), this.getBmsDevice()];
 
-        return Promise.all(promises).then(async ([organNode, deviceNode]: SpinalNode[]) => {
-            const organModel = await organNode.getElement(true);
-            if (organModel) {
+        return Promise.all(promises).then(async ([organModel, deviceNode]: [SpinalOrganConfigModel, SpinalNode]) => {
+            // const organModel = await organNode.getElement(true);
+            // if (organModel) {
                 deviceNode.info.remove_attr('listener'); // remove reference to listener in device
                 return organModel.removeListenerModelFromGraph(this); // remove listener from organ listener list
-            }
+            // }
         })
     }
 
@@ -120,7 +121,7 @@ public getAllData(): Promise<IDataNodes> {
     }
 
 
-    private _loadData(dataName: string): Promise<SpinalNode> {
+    private _loadData(dataName: string): Promise<SpinalNode | SpinalOrganConfigModel> {
         return new Promise((resolve, reject) => {
             try {
                 if (this[dataName] === undefined) throw new Error(`${dataName} not found`);

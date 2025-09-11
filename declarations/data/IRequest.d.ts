@@ -1,4 +1,5 @@
 import { SpinalNode } from "spinal-env-viewer-graph-service";
+import SpinalOrganConfigModel from "../models/SpinalOrganConfigModel";
 export interface IRequest {
     address: string;
     SADR?: any;
@@ -11,7 +12,7 @@ export interface IRequest {
 }
 export interface IDataNodes {
     graph: SpinalNode;
-    organ: SpinalNode;
+    organ: SpinalOrganConfigModel;
     context: SpinalNode;
     device: SpinalNode;
     network: SpinalNode;
