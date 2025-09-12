@@ -30,7 +30,7 @@ import SpinalOrganConfigModel from './SpinalOrganConfigModel';
 
 
 class SpinalPilotModel extends Model {
-   constructor(organ?: SpinalOrganConfigModel, request?: IRequest | IRequest[]) {
+   constructor(organ?: SpinalOrganConfigModel, request?: IRequest | IRequest[], nodeToPilot?: SpinalNode) {
       super();
 
       if (!organ || !request) return;
@@ -39,6 +39,7 @@ class SpinalPilotModel extends Model {
          id: uuidv4(),
          state: new Choice(0, ["normal", "process", "success", "error"]),
          organ: organ,
+         node: nodeToPilot,
          requests: Array.isArray(request) ? request : [request]
       })
    }
@@ -74,7 +75,7 @@ class SpinalPilotModel extends Model {
             // const organModel = await organNode.getElement(true);
             // if (organModel) {
                 const length = await organModel.addPilotToGraph(this);
-                await this.addToNode(organModel.getNode());
+                await this.addToNode(this.node);
                 return length;
             // }
         })

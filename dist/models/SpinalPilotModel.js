@@ -36,7 +36,7 @@ exports.SpinalPilotModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
 const uuid_1 = require("uuid");
 class SpinalPilotModel extends spinal_core_connectorjs_type_1.Model {
-    constructor(organ, request) {
+    constructor(organ, request, nodeToPilot) {
         super();
         if (!organ || !request)
             return;
@@ -44,6 +44,7 @@ class SpinalPilotModel extends spinal_core_connectorjs_type_1.Model {
             id: (0, uuid_1.v4)(),
             state: new spinal_core_connectorjs_type_1.Choice(0, ["normal", "process", "success", "error"]),
             organ: organ,
+            node: nodeToPilot,
             requests: Array.isArray(request) ? request : [request]
         });
     }
@@ -72,7 +73,7 @@ class SpinalPilotModel extends spinal_core_connectorjs_type_1.Model {
             // const organModel = await organNode.getElement(true);
             // if (organModel) {
             const length = yield organModel.addPilotToGraph(this);
-            yield this.addToNode(organModel.getNode());
+            yield this.addToNode(this.node);
             return length;
             // }
         }));
