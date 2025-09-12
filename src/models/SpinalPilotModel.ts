@@ -74,7 +74,7 @@ class SpinalPilotModel extends Model {
         return this.getOrgan().then(async (organModel: SpinalOrganConfigModel) => {
             // const organModel = await organNode.getElement(true);
             // if (organModel) {
-                const length = await organModel.addPilotToGraph(this);
+                const length = await organModel.addPilotModelToGraph(this);
                 await this.addToNode(this.node);
                 return length;
             // }
