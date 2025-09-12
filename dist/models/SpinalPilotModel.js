@@ -71,7 +71,9 @@ class SpinalPilotModel extends spinal_core_connectorjs_type_1.Model {
         return this.getOrgan().then((organModel) => __awaiter(this, void 0, void 0, function* () {
             // const organModel = await organNode.getElement(true);
             // if (organModel) {
-            return organModel.addPilotToGraph(this);
+            const length = yield organModel.addPilotToGraph(this);
+            yield this.addToNode(organModel.getNode());
+            return length;
             // }
         }));
     }
@@ -79,7 +81,9 @@ class SpinalPilotModel extends spinal_core_connectorjs_type_1.Model {
         return this.getOrgan().then((organModel) => __awaiter(this, void 0, void 0, function* () {
             // const organModel = await organNode.getElement(true);
             // if (organModel) {
-            return organModel.removePilotModelFromGraph(this);
+            const removed = yield organModel.removePilotModelFromGraph(this);
+            yield this.removeFromNode();
+            return removed;
             // }
         }));
     }
@@ -102,7 +106,7 @@ class SpinalPilotModel extends spinal_core_connectorjs_type_1.Model {
             return res;
         });
     }
-    removeToNode() {
+    removeFromNode() {
         return new Promise((resolve, reject) => {
             if (this.node) {
                 this.node.info.pilot.load(lst => {

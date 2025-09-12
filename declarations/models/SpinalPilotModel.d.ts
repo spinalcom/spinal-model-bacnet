@@ -13,7 +13,7 @@ declare class SpinalPilotModel extends Model {
     addToGraph(): Promise<number>;
     removeFromGraph(): Promise<boolean>;
     addToNode(endpoint: SpinalNode<any>): Promise<any>;
-    removeToNode(): Promise<any>;
+    removeFromNode(): Promise<any>;
 }
 export default SpinalPilotModel;
 export { SpinalPilotModel };

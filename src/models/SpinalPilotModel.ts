@@ -73,7 +73,9 @@ class SpinalPilotModel extends Model {
         return this.getOrgan().then(async (organModel: SpinalOrganConfigModel) => {
             // const organModel = await organNode.getElement(true);
             // if (organModel) {
-                return organModel.addPilotToGraph(this);
+                const length = await organModel.addPilotToGraph(this);
+                await this.addToNode(organModel.getNode());
+                return length;
             // }
         })
     }
@@ -82,7 +84,9 @@ class SpinalPilotModel extends Model {
         return this.getOrgan().then(async (organModel: SpinalOrganConfigModel) => {
             // const organModel = await organNode.getElement(true);
             // if (organModel) {
-                return organModel.removePilotModelFromGraph(this);
+               const removed = await organModel.removePilotModelFromGraph(this);
+               await this.removeFromNode();
+               return removed;
             // }
         })
     }
@@ -107,7 +111,7 @@ class SpinalPilotModel extends Model {
       })
    }
 
-   public removeToNode(): Promise<any> {
+   public removeFromNode(): Promise<any> {
       return new Promise((resolve, reject) => {
          if (this.node) {
             this.node.info.pilot.load(lst => {
