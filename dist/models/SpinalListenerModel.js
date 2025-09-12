@@ -78,7 +78,7 @@ class SpinalListenerModel extends spinal_core_connectorjs_type_1.Model {
         return this._loadData('context');
     }
     getBmsDevice() {
-        return this._loadData('bmsDevice');
+        return this._loadData('device');
     }
     getNetwork() {
         return this._loadData('network');

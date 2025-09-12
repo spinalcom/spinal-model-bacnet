@@ -79,7 +79,7 @@ public async getAllData(): Promise<IDataNodes> {
     }
 
     public getBmsDevice(): Promise<SpinalNode> {
-        return this._loadData('bmsDevice') as Promise<SpinalNode>;
+        return this._loadData('device') as Promise<SpinalNode>;
     }
 
     public getNetwork(): Promise<SpinalNode> {
