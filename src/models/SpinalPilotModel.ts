@@ -83,7 +83,22 @@ class SpinalPilotModel extends Model {
       })
    }
 
+   // created to be compatible with previous version
+   public addToGraph(endpoint: SpinalNode<any>): Promise<any> {
+      return this.addToNode(endpoint);
+   }
+
+   // created to be compatible with previous version
+   public removeFromGraph(): Promise<any> {
+      return this.removeFromNode();
+   }
+
    public removeToNode(): Promise<any> {
+      console.warn("removeToNode is deprecated, use removeFromNode instead");
+      return this.removeFromNode();
+   }
+
+   public removeFromNode(): Promise<any> {
       return new Promise((resolve, reject) => {
          if (this.node) {
             this.node.info.pilot.load(lst => {

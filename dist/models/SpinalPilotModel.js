@@ -72,7 +72,19 @@ class SpinalPilotModel extends spinal_core_connectorjs_type_1.Model {
             return res;
         });
     }
+    // created to be compatible with previous version
+    addToGraph(endpoint) {
+        return this.addToNode(endpoint);
+    }
+    // created to be compatible with previous version
+    removeFromGraph() {
+        return this.removeFromNode();
+    }
     removeToNode() {
+        console.warn("removeToNode is deprecated, use removeFromNode instead");
+        return this.removeFromNode();
+    }
+    removeFromNode() {
         return new Promise((resolve, reject) => {
             if (this.node) {
                 this.node.info.pilot.load(lst => {

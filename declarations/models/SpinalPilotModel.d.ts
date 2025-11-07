@@ -10,7 +10,10 @@ declare class SpinalPilotModel extends Model {
     setErrorMode(): void;
     isNormal(): boolean;
     addToNode(endpoint: SpinalNode<any>): Promise<any>;
+    addToGraph(endpoint: SpinalNode<any>): Promise<any>;
+    removeFromGraph(): Promise<any>;
     removeToNode(): Promise<any>;
+    removeFromNode(): Promise<any>;
 }
 export default SpinalPilotModel;
 export { SpinalPilotModel };
