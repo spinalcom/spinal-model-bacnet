@@ -22,10 +22,20 @@
  * with this file. If not, see
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SpinalBacnetValueModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
 const uuid_1 = require("uuid");
+const constants_1 = require("../data/constants");
 class SpinalBacnetValueModel extends spinal_core_connectorjs_type_1.Model {
     constructor(graph, context, organ, network, node, sensor) {
         super();
@@ -38,59 +48,51 @@ class SpinalBacnetValueModel extends spinal_core_connectorjs_type_1.Model {
             graph: new spinal_core_connectorjs_type_1.Pbr(graph),
             network: new spinal_core_connectorjs_type_1.Pbr(network),
             organ: new spinal_core_connectorjs_type_1.Pbr(organ),
-            state: 'wait',
+            state: constants_1.BACNET_VALUES_STATE.wait,
             sensor: sensor,
             progress: 0
         });
     }
-    addToNode() {
-        return this.loadItem('node').then((node) => {
-            node.info.add_attr({ bacnet: new spinal_core_connectorjs_type_1.Ptr(this) });
+    changeState(state) {
+        this.state.set(state);
+    }
+    getGraph() {
+        return this.loadPtr(this.graph);
+    }
+    getOrgan() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.loadPtr(this.organ);
         });
     }
-    remToNode() {
-        return this.loadItem('node').then((node) => {
-            if (node.info.bacnet)
-                node.info.rem_attr("bacnet");
-            node.info.rem_attr('bacnet');
-        });
+    getContext() {
+        return this.loadPtr(this.context);
+    }
+    getNode() {
+        return this.loadPtr(this.node);
+    }
+    getNetwork() {
+        return this.loadPtr(this.network);
+    }
+    addToGraph() {
+        return this.getOrgan().then((organNode) => __awaiter(this, void 0, void 0, function* () {
+            const organ = yield organNode.getElement(true);
+            return organ.addBacnetValuesModelToGraph(this);
+        }));
+    }
+    removeFromGraph() {
+        return this.getOrgan().then((organNode) => __awaiter(this, void 0, void 0, function* () {
+            const organ = yield organNode.getElement(true);
+            return organ.removeBacnetValuesModelFromGraph(this);
+        }));
     }
     getAllItem() {
-        const promises = [this.loadItem('context'), this.loadItem('node'), this.loadItem('graph'), this.loadItem('network'), this.loadItem('organ')];
+        const promises = [this.getContext(), this.getNode(), this.getGraph(), this.getNetwork(), this.getOrgan()];
         return Promise.all(promises).then(([context, node, graph, network, organ]) => {
-            return {
-                context,
-                node,
-                graph,
-                network,
-                organ
-            };
+            return { context, node, graph, network, organ };
         });
     }
-    loadItem(name) {
-        return new Promise((resolve, reject) => {
-            this[name].load((res) => {
-                resolve(res);
-            });
-        });
-    }
-    setWaitState() {
-        this.state.set("wait");
-    }
-    setRecoverState() {
-        this.state.set("recover");
-    }
-    setProgressState() {
-        this.state.set("progress");
-    }
-    setNormalState() {
-        this.state.set("normal");
-    }
-    setSuccessState() {
-        this.state.set("success");
-    }
-    setErrorState() {
-        this.state.set("error");
+    loadItem(ptr) {
+        return new Promise((resolve) => ptr.load((res) => resolve(res)));
     }
 }
 exports.SpinalBacnetValueModel = SpinalBacnetValueModel;

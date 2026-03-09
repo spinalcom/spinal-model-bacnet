@@ -25,23 +25,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SpinalListenerModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
-const uuid_1 = require("uuid");
-class SpinalListenerModel extends spinal_core_connectorjs_type_1.Model {
-    constructor(graph, context, network, bmsDevice, organ, monitor) {
-        super();
-        if (!graph || !context || !network || !bmsDevice || !organ || !monitor)
+const spinal_connector_service_1 = require("spinal-connector-service");
+class SpinalListenerModel extends spinal_connector_service_1.SpinalListener {
+    constructor(graph, context, organ, network, bmsDevice, profile) {
+        super(graph, context, organ, network, bmsDevice);
+        if (!graph || !context || !network || !bmsDevice || !organ || !profile)
             return;
         this.add_attr({
-            id: (0, uuid_1.v4)(),
-            graph: new spinal_core_connectorjs_type_1.Pbr(graph),
-            listen: true,
             saveTimeSeries: false,
-            // timeInterval: timeInterval,
-            device: new spinal_core_connectorjs_type_1.Pbr(bmsDevice),
-            context: new spinal_core_connectorjs_type_1.Pbr(context),
-            network: new spinal_core_connectorjs_type_1.Pbr(network),
-            organ: new spinal_core_connectorjs_type_1.Pbr(organ),
-            monitor: monitor
         });
     }
 }

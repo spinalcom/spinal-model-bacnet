@@ -1,10 +1,8 @@
-import { Model } from 'spinal-core-connectorjs_type';
 import { SpinalGraph } from 'spinal-model-graph';
-import SpinalOrganConfigModel from './SpinalOrganConfigModel';
 import { SpinalContext, SpinalNode } from 'spinal-env-viewer-graph-service';
-import SpinalMonitorInfoModel from './SpinalMonitorInfoModel';
-declare class SpinalListenerModel extends Model {
-    constructor(graph?: SpinalGraph<any>, context?: SpinalContext<any>, network?: SpinalNode<any>, bmsDevice?: SpinalNode<any>, organ?: SpinalOrganConfigModel, monitor?: SpinalMonitorInfoModel);
+import { SpinalListener } from "spinal-connector-service";
+declare class SpinalListenerModel extends SpinalListener {
+    constructor(graph?: SpinalGraph, context?: SpinalContext, organ?: SpinalNode, network?: SpinalNode, bmsDevice?: SpinalNode, profile?: SpinalNode);
 }
 export default SpinalListenerModel;
 export { SpinalListenerModel };

@@ -22,92 +22,53 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 
-import { spinalCore, Model, Ptr, Lst, Pbr } from 'spinal-core-connectorjs_type';
-import { STATES } from "../data/StateEnum";
-import { v4 as uuidv4 } from "uuid";
-import { SpinalGraph } from 'spinal-env-viewer-graph-service';
-import SpinalOrganConfigModel from './SpinalOrganConfigModel';
+import { spinalCore, Lst } from 'spinal-core-connectorjs_type';
+import { SpinalContext, SpinalGraph, SpinalNode } from 'spinal-env-viewer-graph-service';
+import { IDevice } from '../data/IDevice';
+import { SpinalDiscover, STATES } from "spinal-connector-service";
+import { INetwork } from '../data/INetwork';
 
-class SpinalDisoverModel extends Model {
-   constructor(graph?: SpinalGraph<any>, contextInfo?: { id: string; name: string; type: string }, network?: { id: string; name: string; type: string }, organ?: SpinalOrganConfigModel) {
-      super();
-      if (!graph || !contextInfo || !network || !organ) return;
+class SpinalDisoverModel extends SpinalDiscover {
+   constructor(graph?: SpinalGraph, context?: SpinalContext, organ?: SpinalNode, network?: INetwork) {
+      super(graph, context, organ);
+      if (!graph || !context || !network) return;
 
       this.add_attr({
-         id: uuidv4(),
-         state: STATES.reseted,
-         graph: graph ? new Pbr(graph) : undefined,
-         devices: new Lst(),
-         context: contextInfo || {},
-         network: network || {},
-         organ: organ,
-         creation: Date.now()
-      })
-   }
-
-   public setDiscoveringMode(): void {
-      this.state.set(STATES.discovering);
-      // setTimeout(() => {
-      //    if (this.state.get() === STATES.discovering) this.setTimeoutMode();
-      // }, 40000)
-   }
-
-   public setDiscoveredMode(): void {
-      this.state.set(STATES.discovered);
-   }
-
-   public setResetedMode(): void {
-      this.state.set(STATES.reseted);
-   }
-
-   public setTimeoutMode(): void {
-      this.state.set(STATES.timeout);
-   }
-
-   public setCreatingMode(): void {
-      this.state.set(STATES.creating);
-   }
-
-   public setCreatedMode(): void {
-      this.state.set(STATES.created);
-   }
-
-   public setErrorMode(): void {
-      this.state.set(STATES.error);
-   }
-
-   public addToGraph(): Promise<boolean> {
-      if (!this.organ.discover) {
-         const x = new Lst();
-         x.push(this);
-         this.organ.add_attr({
-            discover: new Ptr(x),
-         });
-         Promise.resolve(true);
-      } else {
-         return new Promise((resolve, reject) => {
-            this.organ.discover.load((list) => {
-               list.push(this);
-               resolve(true);
-            });
-         });
-      }
-   }
-
-   public remove(): Promise<boolean> {
-
-      return new Promise((resolve, reject) => {
-         this.organ.discover.load((list) => {
-            for (let i = 0; i < list.length; i++) {
-               const element = list[i];
-               if (element._server_id === this._server_id) {
-                  list.splice(i);
-                  return resolve(true);
-               }
-            }
-         });
+         network
       });
+   }
 
+   public setDiscoveringState(): void {
+      this.changeState(STATES.discovering);
+   }
+
+   public setDiscoveredState(): void {
+      this.changeState(STATES.discovered);
+   }
+
+   public setInitialState(): void {
+      this.changeState(STATES.initial);
+   }
+
+   public setResetedState(): void {
+      console.warn("depricated method, use setInitialState instead");
+      this.setInitialState();
+   }
+
+   public setTimeoutState(): void {
+      this.changeState(STATES.timeout);
+   }
+
+   public setCreatingState(): void {
+      this.changeState(STATES.creating);
+   }
+
+   public setCreatedState(): void {
+      this.changeState(STATES.created);
+   }
+
+   public setErrorState(): void {
+      this.changeState(STATES.error);
    }
 
 }

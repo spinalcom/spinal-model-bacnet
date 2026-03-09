@@ -22,71 +22,45 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 
-import { Model, Pbr, spinalCore } from 'spinal-core-connectorjs_type';
-import { SpinalNode } from 'spinal-env-viewer-graph-service';
-import { v4 as uuidv4 } from "uuid";
+import { Lst, spinalCore } from 'spinal-core-connectorjs_type';
 import { BACNET_ORGAN_TYPE } from "../data/constants";
+import { ModelsInfo, SpinalOrganModel } from "spinal-connector-service";
+import SpinalBacnetValueModel from './SpinalBacnetValueModel';
 
-
-class SpinalOrganConfigModel extends Model {
+class SpinalOrganConfigModel extends SpinalOrganModel {
 
    static TYPE: string = BACNET_ORGAN_TYPE;
    static CONTEXT_TO_ORGAN_RELATION: string = "hasBmsNetworkOrgan";
 
-
    constructor(name?: string, type: string = BACNET_ORGAN_TYPE) {
-      super();
+      super(name, type);
 
       if (!name) return;
 
       this.add_attr({
-         id: uuidv4(),
-         name,
-         type,
-         references: {},
-         restart: false,
+         allBacnetValues: new ModelsInfo<SpinalBacnetValueModel>()
       })
    }
 
-   public addReference(contextId: string, spinalNode: SpinalNode<any>): Promise<SpinalNode<any>> {
 
-      if (this.references[contextId]) {
-         return new Promise((resolve, reject) => {
-            this.references[contextId].load((e) => {
-               if (typeof e !== "undefined") return reject("The organ is already linked to this context");
-               this.references.mod_attr(contextId, new Pbr(spinalNode));
-               resolve(spinalNode);
-            })
-         });
-
-      }
-
-      this.references.add_attr({ [contextId]: new Pbr(spinalNode) })
-      return Promise.resolve(spinalNode);
+   public addBacnetValuesModelToGraph(allBacnetValues: SpinalBacnetValueModel): Promise<number> {
+      if (!this.allBacnetValues) this.add_attr({ allBacnetValues: new ModelsInfo<SpinalBacnetValueModel>() });
+      return this.allBacnetValues.addModel(allBacnetValues);
    }
 
-   public isReferencedInContext(contextId: string): Promise<boolean> {
-      if (typeof this.references[contextId] === "undefined") return Promise.resolve(false);
-
-      return new Promise((resolve, reject) => {
-         this.references[contextId].load((e) => {
-            if (typeof e === "undefined") return resolve(false)
-            resolve(true);
-         })
-      });
-
+   public removeBacnetValuesModelFromGraph(bacnetValuesModel: SpinalBacnetValueModel): Promise<boolean> {
+      if (this.allBacnetValues) return this.allBacnetValues.removeModel(bacnetValuesModel);
+      return Promise.resolve(false);
    }
 
-   public removeReference(contextId: string): Promise<SpinalNode<any>> {
-      if (this.references[contextId]) {
-         return new Promise((resolve, reject) => {
-            this.references[contextId].load(node => {
-               this.references.rem_attr(contextId);
-               resolve(node);
-            })
-         });
-      }
+   public getBacnetValuesModelFromGraph(): Promise<Lst<SpinalBacnetValueModel> | undefined> {
+      if (!this.allBacnetValues) return Promise.resolve(undefined);
+      return this.allBacnetValues.getList();
    }
+
+
+
+
 }
 
 //@ts-ignore

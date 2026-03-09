@@ -1,24 +1,19 @@
 import { Model } from 'spinal-core-connectorjs_type';
 import { SpinalContext, SpinalGraph, SpinalNode } from 'spinal-env-viewer-graph-service';
-import SpinalOrganConfigModel from './SpinalOrganConfigModel';
+import { BACNET_VALUES_STATE } from '../data/constants';
+import { IAllItemsRes } from '../data/IAllItemsRes';
 declare class SpinalBacnetValueModel extends Model {
-    constructor(graph?: SpinalGraph<any>, context?: SpinalContext<any>, organ?: SpinalNode<any>, network?: SpinalNode<any>, node?: SpinalNode<any>, sensor?: number[]);
-    addToNode(): Promise<void>;
-    remToNode(): Promise<void>;
-    getAllItem(): Promise<{
-        node: SpinalNode<any>;
-        context: SpinalContext<any>;
-        graph: SpinalGraph<any>;
-        network: SpinalNode<any>;
-        organ: SpinalOrganConfigModel;
-    }>;
-    loadItem(name: string): Promise<SpinalNode<any> | SpinalContext<any> | SpinalGraph<any> | SpinalNode<any> | any>;
-    setWaitState(): void;
-    setRecoverState(): void;
-    setProgressState(): void;
-    setNormalState(): void;
-    setSuccessState(): void;
-    setErrorState(): void;
+    constructor(graph?: SpinalGraph, context?: SpinalContext, organ?: SpinalNode, network?: SpinalNode, node?: SpinalNode, sensor?: number[]);
+    changeState(state: typeof BACNET_VALUES_STATE[keyof typeof BACNET_VALUES_STATE]): void;
+    getGraph(): Promise<SpinalGraph>;
+    getOrgan(): Promise<SpinalNode>;
+    getContext(): Promise<SpinalContext>;
+    getNode(): Promise<SpinalNode>;
+    getNetwork(): Promise<SpinalNode>;
+    addToGraph(): Promise<number>;
+    removeFromGraph(): Promise<boolean>;
+    getAllItem(): Promise<IAllItemsRes>;
+    loadItem(ptr: spinal.Ptr): Promise<SpinalNode | SpinalContext | SpinalGraph | SpinalNode | any>;
 }
 export default SpinalBacnetValueModel;
 export { SpinalBacnetValueModel };

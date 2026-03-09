@@ -1,12 +1,13 @@
-import { Model } from 'spinal-core-connectorjs_type';
-import { SpinalNode } from 'spinal-env-viewer-graph-service';
-declare class SpinalOrganConfigModel extends Model {
+import { Lst } from 'spinal-core-connectorjs_type';
+import { SpinalOrganModel } from "spinal-connector-service";
+import SpinalBacnetValueModel from './SpinalBacnetValueModel';
+declare class SpinalOrganConfigModel extends SpinalOrganModel {
     static TYPE: string;
     static CONTEXT_TO_ORGAN_RELATION: string;
     constructor(name?: string, type?: string);
-    addReference(contextId: string, spinalNode: SpinalNode<any>): Promise<SpinalNode<any>>;
-    isReferencedInContext(contextId: string): Promise<boolean>;
-    removeReference(contextId: string): Promise<SpinalNode<any>>;
+    addBacnetValuesModelToGraph(allBacnetValues: SpinalBacnetValueModel): Promise<number>;
+    removeBacnetValuesModelFromGraph(bacnetValuesModel: SpinalBacnetValueModel): Promise<boolean>;
+    getBacnetValuesModelFromGraph(): Promise<Lst<SpinalBacnetValueModel> | undefined>;
 }
 export default SpinalOrganConfigModel;
 export { SpinalOrganConfigModel };

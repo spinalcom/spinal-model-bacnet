@@ -28,23 +28,15 @@ import SpinalOrganConfigModel from './SpinalOrganConfigModel';
 import { v4 as uuidv4 } from "uuid";
 import { SpinalContext, SpinalNode } from 'spinal-env-viewer-graph-service';
 import SpinalMonitorInfoModel from './SpinalMonitorInfoModel';
+import { SpinalListener } from "spinal-connector-service";
 
-class SpinalListenerModel extends Model {
-   constructor(graph?: SpinalGraph<any>, context?: SpinalContext<any>, network?: SpinalNode<any>, bmsDevice?: SpinalNode<any>, organ?: SpinalOrganConfigModel, monitor?: SpinalMonitorInfoModel) {
-      super();
-      if (!graph || !context || !network || !bmsDevice || !organ || !monitor) return;
+class SpinalListenerModel extends SpinalListener {
+   constructor(graph?: SpinalGraph, context?: SpinalContext, organ?: SpinalNode, network?: SpinalNode, bmsDevice?: SpinalNode, profile?: SpinalNode) {
+      super(graph, context, organ, network, bmsDevice,);
+      if (!graph || !context || !network || !bmsDevice || !organ || !profile) return;
 
       this.add_attr({
-         id: uuidv4(),
-         graph: new Pbr(graph),
-         listen: true,
          saveTimeSeries: false,
-         // timeInterval: timeInterval,
-         device: new Pbr(bmsDevice),
-         context: new Pbr(context),
-         network: new Pbr(network),
-         organ: new Pbr(organ),
-         monitor: monitor
       })
    }
 }

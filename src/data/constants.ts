@@ -22,8 +22,13 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 
-const BACNET_ORGAN_TYPE = "BACNET_ORGAN";
+export const BACNET_ORGAN_TYPE = "BACNET_ORGAN";
 
-export {
-   BACNET_ORGAN_TYPE
-}
+export const BACNET_VALUES_STATE = {
+   wait: "wait",
+   recover: "recover",
+   progress: "progress",
+   normal: "normal",
+   success: "success",
+   error: "error"
+} as const;

@@ -22,13 +22,15 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 
-import { spinalCore, Model, Ptr, Pbr, Choice } from 'spinal-core-connectorjs_type';
+import { spinalCore, Model, Ptr, Pbr } from 'spinal-core-connectorjs_type';
 import { SpinalContext, SpinalGraph, SpinalNode } from 'spinal-env-viewer-graph-service';
 import { v4 as uuidv4 } from "uuid";
 import SpinalOrganConfigModel from './SpinalOrganConfigModel';
+import { BACNET_VALUES_STATE } from '../data/constants';
+import { IAllItemsRes } from '../data/IAllItemsRes';
 
 class SpinalBacnetValueModel extends Model {
-   constructor(graph?: SpinalGraph<any>, context?: SpinalContext<any>, organ?: SpinalNode<any>, network?: SpinalNode<any>, node?: SpinalNode<any>, sensor?: number[]) {
+   constructor(graph?: SpinalGraph, context?: SpinalContext, organ?: SpinalNode, network?: SpinalNode, node?: SpinalNode, sensor?: number[]) {
       super();
 
       if (!graph || !context || !organ || !network || !node || !sensor) return;
@@ -40,78 +42,62 @@ class SpinalBacnetValueModel extends Model {
          graph: new Pbr(graph),
          network: new Pbr(network),
          organ: new Pbr(organ),
-         state: 'wait',
+         state: BACNET_VALUES_STATE.wait,
          sensor: sensor,
          progress: 0
       })
    }
 
-   public addToNode(): Promise<void> {
-      return this.loadItem('node').then((node: any) => {
+   public changeState(state: typeof BACNET_VALUES_STATE[keyof typeof BACNET_VALUES_STATE]): void {
+      this.state.set(state);
+   }
 
-         node.info.add_attr({ bacnet: new Ptr(this) });
+   public getGraph(): Promise<SpinalGraph> {
+      return this.loadPtr(this.graph);
+   }
+
+   public async getOrgan(): Promise<SpinalNode> {
+      return this.loadPtr(this.organ);
+   }
+
+   public getContext(): Promise<SpinalContext> {
+      return this.loadPtr(this.context);
+   }
+
+   public getNode(): Promise<SpinalNode> {
+      return this.loadPtr(this.node);
+   }
+
+   public getNetwork(): Promise<SpinalNode> {
+      return this.loadPtr(this.network);
+   }
+
+   public addToGraph(): Promise<number> {
+      return this.getOrgan().then(async (organNode: SpinalNode) => {
+         const organ = await organNode.getElement(true) as SpinalOrganConfigModel;
+         return organ.addBacnetValuesModelToGraph(this);
       })
    }
 
-   public remToNode(): Promise<void> {
-      return this.loadItem('node').then((node: any) => {
-         if (node.info.bacnet) node.info.rem_attr("bacnet");
-         node.info.rem_attr('bacnet');
+   public removeFromGraph(): Promise<boolean> {
+      return this.getOrgan().then(async (organNode: SpinalNode) => {
+         const organ = await organNode.getElement(true) as SpinalOrganConfigModel;
+         return organ.removeBacnetValuesModelFromGraph(this);
       })
-
    }
 
-   public getAllItem(): Promise<{
-      node: SpinalNode<any>;
-      context: SpinalContext<any>;
-      graph: SpinalGraph<any>;
-      network: SpinalNode<any>;
-      organ: SpinalOrganConfigModel;
-   }> {
-      const promises = [this.loadItem('context'), this.loadItem('node'), this.loadItem('graph'), this.loadItem('network'), this.loadItem('organ')];
+   public getAllItem(): Promise<IAllItemsRes> {
+      const promises = [this.getContext(), this.getNode(), this.getGraph(), this.getNetwork(), this.getOrgan()];
+
       return Promise.all(promises).then(([context, node, graph, network, organ]) => {
-         return {
-            context,
-            node,
-            graph,
-            network,
-            organ
-         }
+         return { context, node, graph, network, organ } as IAllItemsRes;
       })
    }
 
-   public loadItem(name: string): Promise<SpinalNode<any> | SpinalContext<any> | SpinalGraph<any> | SpinalNode<any> | any> {
-      return new Promise((resolve, reject) => {
-         this[name].load((res) => {
-            resolve(res);
-         })
-      });
+   public loadItem(ptr: spinal.Ptr): Promise<SpinalNode | SpinalContext | SpinalGraph | SpinalNode | any> {
+      return new Promise((resolve) => ptr.load((res) => resolve(res)));
    }
 
-
-   public setWaitState(): void {
-      this.state.set("wait")
-   }
-
-   public setRecoverState(): void {
-      this.state.set("recover")
-   }
-
-   public setProgressState(): void {
-      this.state.set("progress")
-   }
-
-   public setNormalState(): void {
-      this.state.set("normal")
-   }
-
-   public setSuccessState(): void {
-      this.state.set("success")
-   }
-
-   public setErrorState(): void {
-      this.state.set("error")
-   }
 
 }
 

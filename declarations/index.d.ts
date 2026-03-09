@@ -4,6 +4,7 @@ export * from "./models/SpinalBacnetValueModel";
 export * from "./models/SpinalMonitorInfoModel";
 export * from "./models/SpinalPilotModel";
 export * from "./models/SpinalOrganConfigModel";
-export * from "./data/StateEnum";
 export * from "./data/IRequest";
+export * from "./data/IDevice";
 export * from "./data/constants";
+export * from "./data/IAllItemsRes";

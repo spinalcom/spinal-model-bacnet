@@ -25,78 +25,40 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SpinalDisoverModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
-const StateEnum_1 = require("../data/StateEnum");
-const uuid_1 = require("uuid");
-class SpinalDisoverModel extends spinal_core_connectorjs_type_1.Model {
-    constructor(graph, contextInfo, network, organ) {
-        super();
-        if (!graph || !contextInfo || !network || !organ)
+const spinal_connector_service_1 = require("spinal-connector-service");
+class SpinalDisoverModel extends spinal_connector_service_1.SpinalDiscover {
+    constructor(graph, context, organ, network) {
+        super(graph, context, organ);
+        if (!graph || !context || !network)
             return;
         this.add_attr({
-            id: (0, uuid_1.v4)(),
-            state: StateEnum_1.STATES.reseted,
-            graph: graph ? new spinal_core_connectorjs_type_1.Pbr(graph) : undefined,
-            devices: new spinal_core_connectorjs_type_1.Lst(),
-            context: contextInfo || {},
-            network: network || {},
-            organ: organ,
-            creation: Date.now()
+            network
         });
     }
-    setDiscoveringMode() {
-        this.state.set(StateEnum_1.STATES.discovering);
-        // setTimeout(() => {
-        //    if (this.state.get() === STATES.discovering) this.setTimeoutMode();
-        // }, 40000)
+    setDiscoveringState() {
+        this.changeState(spinal_connector_service_1.STATES.discovering);
     }
-    setDiscoveredMode() {
-        this.state.set(StateEnum_1.STATES.discovered);
+    setDiscoveredState() {
+        this.changeState(spinal_connector_service_1.STATES.discovered);
     }
-    setResetedMode() {
-        this.state.set(StateEnum_1.STATES.reseted);
+    setInitialState() {
+        this.changeState(spinal_connector_service_1.STATES.initial);
     }
-    setTimeoutMode() {
-        this.state.set(StateEnum_1.STATES.timeout);
+    setResetedState() {
+        console.warn("depricated method, use setInitialState instead");
+        this.setInitialState();
     }
-    setCreatingMode() {
-        this.state.set(StateEnum_1.STATES.creating);
+    setTimeoutState() {
+        this.changeState(spinal_connector_service_1.STATES.timeout);
     }
-    setCreatedMode() {
-        this.state.set(StateEnum_1.STATES.created);
+    setCreatingState() {
+        this.changeState(spinal_connector_service_1.STATES.creating);
     }
-    setErrorMode() {
-        this.state.set(StateEnum_1.STATES.error);
+    setCreatedState() {
+        this.changeState(spinal_connector_service_1.STATES.created);
     }
-    addToGraph() {
-        if (!this.organ.discover) {
-            const x = new spinal_core_connectorjs_type_1.Lst();
-            x.push(this);
-            this.organ.add_attr({
-                discover: new spinal_core_connectorjs_type_1.Ptr(x),
-            });
-            Promise.resolve(true);
-        }
-        else {
-            return new Promise((resolve, reject) => {
-                this.organ.discover.load((list) => {
-                    list.push(this);
-                    resolve(true);
-                });
-            });
-        }
-    }
-    remove() {
-        return new Promise((resolve, reject) => {
-            this.organ.discover.load((list) => {
-                for (let i = 0; i < list.length; i++) {
-                    const element = list[i];
-                    if (element._server_id === this._server_id) {
-                        list.splice(i);
-                        return resolve(true);
-                    }
-                }
-            });
-        });
+    setErrorState() {
+        this.changeState(spinal_connector_service_1.STATES.error);
     }
 }
 exports.SpinalDisoverModel = SpinalDisoverModel;
