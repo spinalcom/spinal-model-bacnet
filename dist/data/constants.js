@@ -31,6 +31,7 @@ exports.BACNET_VALUES_STATE = {
     progress: "progress",
     normal: "normal",
     success: "success",
-    error: "error"
+    error: "error",
+    cancelled: "cancelled"
 };
 //# sourceMappingURL=constants.js.map

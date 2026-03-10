@@ -6,4 +6,5 @@ export declare const BACNET_VALUES_STATE: {
     readonly normal: "normal";
     readonly success: "success";
     readonly error: "error";
+    readonly cancelled: "cancelled";
 };
