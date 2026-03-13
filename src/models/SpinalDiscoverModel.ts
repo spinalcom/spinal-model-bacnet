@@ -28,7 +28,7 @@ import { IDevice } from '../data/IDevice';
 import { SpinalDiscover, STATES } from "spinal-connector-service";
 import { INetwork } from '../data/INetwork';
 
-class SpinalDisoverModel extends SpinalDiscover {
+class SpinalDiscoverModel extends SpinalDiscover {
    constructor(graph?: SpinalGraph, context?: SpinalContext, organ?: SpinalNode, network?: INetwork) {
       super(graph, context, organ);
       if (!graph || !context || !network) return;
@@ -73,6 +73,6 @@ class SpinalDisoverModel extends SpinalDiscover {
 
 }
 
-spinalCore.register_models([SpinalDisoverModel])
-export default SpinalDisoverModel;
-export { SpinalDisoverModel }
+spinalCore.register_models([SpinalDiscoverModel])
+export default SpinalDiscoverModel;
+export { SpinalDiscoverModel }

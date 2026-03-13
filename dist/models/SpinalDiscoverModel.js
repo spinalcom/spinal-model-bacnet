@@ -23,10 +23,10 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SpinalDisoverModel = void 0;
+exports.SpinalDiscoverModel = void 0;
 const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
 const spinal_connector_service_1 = require("spinal-connector-service");
-class SpinalDisoverModel extends spinal_connector_service_1.SpinalDiscover {
+class SpinalDiscoverModel extends spinal_connector_service_1.SpinalDiscover {
     constructor(graph, context, organ, network) {
         super(graph, context, organ);
         if (!graph || !context || !network)
@@ -61,7 +61,7 @@ class SpinalDisoverModel extends spinal_connector_service_1.SpinalDiscover {
         this.changeState(spinal_connector_service_1.STATES.error);
     }
 }
-exports.SpinalDisoverModel = SpinalDisoverModel;
-spinal_core_connectorjs_type_1.spinalCore.register_models([SpinalDisoverModel]);
-exports.default = SpinalDisoverModel;
+exports.SpinalDiscoverModel = SpinalDiscoverModel;
+spinal_core_connectorjs_type_1.spinalCore.register_models([SpinalDiscoverModel]);
+exports.default = SpinalDiscoverModel;
 //# sourceMappingURL=SpinalDiscoverModel.js.map
