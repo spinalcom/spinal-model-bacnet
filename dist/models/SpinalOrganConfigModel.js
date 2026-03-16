@@ -36,6 +36,16 @@ class SpinalOrganConfigModel extends spinal_connector_service_1.SpinalOrganModel
             allBacnetValues: new spinal_connector_service_1.ModelsInfo()
         });
     }
+    initializeModelsList() {
+        if (!this.discover)
+            this.add_attr({ discover: new spinal_connector_service_1.ModelsInfo() });
+        if (!this.pilot)
+            this.add_attr({ pilot: new spinal_connector_service_1.ModelsInfo() });
+        if (!this.listener)
+            this.add_attr({ listener: new spinal_connector_service_1.ModelsInfo() });
+        if (!this.allBacnetValues)
+            this.add_attr({ allBacnetValues: new spinal_connector_service_1.ModelsInfo() });
+    }
     addBacnetValuesModelToGraph(allBacnetValues) {
         if (!this.allBacnetValues)
             this.add_attr({ allBacnetValues: new spinal_connector_service_1.ModelsInfo() });

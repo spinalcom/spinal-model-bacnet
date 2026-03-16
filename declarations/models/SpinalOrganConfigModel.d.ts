@@ -5,6 +5,7 @@ declare class SpinalOrganConfigModel extends SpinalOrganModel {
     static TYPE: string;
     static CONTEXT_TO_ORGAN_RELATION: string;
     constructor(name?: string, type?: string);
+    initializeModelsList(): void;
     addBacnetValuesModelToGraph(allBacnetValues: SpinalBacnetValueModel): Promise<number>;
     removeBacnetValuesModelFromGraph(bacnetValuesModel: SpinalBacnetValueModel): Promise<boolean>;
     getBacnetValuesModelFromGraph(): Promise<Lst<SpinalBacnetValueModel> | undefined>;

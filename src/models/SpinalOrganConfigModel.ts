@@ -26,6 +26,9 @@ import { Lst, spinalCore } from 'spinal-core-connectorjs_type';
 import { BACNET_ORGAN_TYPE } from "../data/constants";
 import { ModelsInfo, SpinalOrganModel } from "spinal-connector-service";
 import SpinalBacnetValueModel from './SpinalBacnetValueModel';
+import SpinalDiscoverModel from './SpinalDiscoverModel';
+import SpinalPilotModel from './SpinalPilotModel';
+import { SpinalListenerModel } from './SpinalListenerModel';
 
 class SpinalOrganConfigModel extends SpinalOrganModel {
 
@@ -40,6 +43,13 @@ class SpinalOrganConfigModel extends SpinalOrganModel {
       this.add_attr({
          allBacnetValues: new ModelsInfo<SpinalBacnetValueModel>()
       })
+   }
+
+   public initializeModelsList() {
+      if (!this.discover) this.add_attr({ discover: new ModelsInfo<SpinalDiscoverModel>() });
+      if (!this.pilot) this.add_attr({ pilot: new ModelsInfo<SpinalPilotModel>() });
+      if (!this.listener) this.add_attr({ listener: new ModelsInfo<SpinalListenerModel>() });
+      if (!this.allBacnetValues) this.add_attr({ allBacnetValues: new ModelsInfo<SpinalBacnetValueModel>() });
    }
 
 
@@ -57,9 +67,6 @@ class SpinalOrganConfigModel extends SpinalOrganModel {
       if (!this.allBacnetValues) return Promise.resolve(undefined);
       return this.allBacnetValues.getList();
    }
-
-
-
 
 }
 
