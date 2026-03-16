@@ -13,7 +13,7 @@ declare class SpinalBacnetValueModel extends Model {
     addToGraph(): Promise<number>;
     removeFromGraph(): Promise<boolean>;
     getAllItem(): Promise<IAllItemsRes>;
-    loadItem(ptr: spinal.Ptr): Promise<SpinalNode | SpinalContext | SpinalGraph | SpinalNode | any>;
+    loadPtr(ptr: spinal.Ptr): Promise<SpinalNode | SpinalContext | SpinalGraph | SpinalNode | any>;
 }
 export default SpinalBacnetValueModel;
 export { SpinalBacnetValueModel };

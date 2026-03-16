@@ -91,7 +91,7 @@ class SpinalBacnetValueModel extends spinal_core_connectorjs_type_1.Model {
             return { context, node, graph, network, organ };
         });
     }
-    loadItem(ptr) {
+    loadPtr(ptr) {
         return new Promise((resolve) => ptr.load((res) => resolve(res)));
     }
 }

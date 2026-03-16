@@ -94,7 +94,7 @@ class SpinalBacnetValueModel extends Model {
       })
    }
 
-   public loadItem(ptr: spinal.Ptr): Promise<SpinalNode | SpinalContext | SpinalGraph | SpinalNode | any> {
+   public loadPtr(ptr: spinal.Ptr): Promise<SpinalNode | SpinalContext | SpinalGraph | SpinalNode | any> {
       return new Promise((resolve) => ptr.load((res) => resolve(res)));
    }
 
