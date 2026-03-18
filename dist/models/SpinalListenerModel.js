@@ -28,7 +28,7 @@ const spinal_core_connectorjs_type_1 = require("spinal-core-connectorjs_type");
 const spinal_connector_service_1 = require("spinal-connector-service");
 class SpinalListenerModel extends spinal_connector_service_1.SpinalListener {
     constructor(graph, context, organ, network, bmsDevice, profile) {
-        super(graph, context, organ, network, bmsDevice);
+        super(graph, context, organ, network, bmsDevice, profile);
         if (!graph || !context || !network || !bmsDevice || !organ || !profile)
             return;
         this.add_attr({

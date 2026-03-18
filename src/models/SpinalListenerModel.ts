@@ -32,7 +32,7 @@ import { SpinalListener } from "spinal-connector-service";
 
 class SpinalListenerModel extends SpinalListener {
    constructor(graph?: SpinalGraph, context?: SpinalContext, organ?: SpinalNode, network?: SpinalNode, bmsDevice?: SpinalNode, profile?: SpinalNode) {
-      super(graph, context, organ, network, bmsDevice,);
+      super(graph, context, organ, network, bmsDevice, profile);
       if (!graph || !context || !network || !bmsDevice || !organ || !profile) return;
 
       this.add_attr({
